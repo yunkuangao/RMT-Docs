@@ -88,7 +88,7 @@ npm run build && npm run serve
 
 ## 说明
 
-- 模板自带的示例内容（教程、博客、示例首页组件）已挪到 `_demo-template/`，不参与构建，确认不需要后可删。
+- 模板自带的示例内容（教程、博客、示例首页组件）、两个版本的原始 `Web/` 源、调试日志都放在 `_demo-template/`，不参与构建，也已加入 `.gitignore` 不入库，确认不需要后可删。
 - `blog` 插件当前关闭，需要更新日志时再打开。
 - 站点标题、导航、页脚、主题色分别在 `docusaurus.config.ts` 与 `src/css/custom.css`。
 - 本机 dev 模式（`npm run start`）返回的页面是客户端渲染的空壳，直接刷新 `/docs/...`
