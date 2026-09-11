@@ -1,0 +1,317 @@
+{
+  "rmtSidebar": [
+    {
+      "type": "doc",
+      "id": "intro"
+    },
+    {
+      "type": "category",
+      "label": "软件介绍",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "guide/index"
+        },
+        {
+          "type": "doc",
+          "id": "guide/global-actions"
+        },
+        {
+          "type": "doc",
+          "id": "guide/tabs"
+        },
+        {
+          "type": "doc",
+          "id": "guide/macro-config"
+        },
+        {
+          "type": "doc",
+          "id": "guide/settings"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "快速上手",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "quickstart/index"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/clicker"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/combo-key"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/key-to-combo"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/recorder"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/string-macro"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/timing-macro"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/search-image"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/search-color"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/search-text"
+        },
+        {
+          "type": "doc",
+          "id": "quickstart/mouse-move"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "指令手册",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "commands/index"
+        },
+        {
+          "type": "doc",
+          "id": "commands/interval"
+        },
+        {
+          "type": "doc",
+          "id": "commands/key"
+        },
+        {
+          "type": "doc",
+          "id": "commands/search"
+        },
+        {
+          "type": "doc",
+          "id": "commands/search-pro"
+        },
+        {
+          "type": "doc",
+          "id": "commands/move"
+        },
+        {
+          "type": "doc",
+          "id": "commands/move-pro"
+        },
+        {
+          "type": "doc",
+          "id": "commands/input"
+        },
+        {
+          "type": "doc",
+          "id": "commands/output"
+        },
+        {
+          "type": "doc",
+          "id": "commands/loop"
+        },
+        {
+          "type": "doc",
+          "id": "commands/macro-op"
+        },
+        {
+          "type": "doc",
+          "id": "commands/variable"
+        },
+        {
+          "type": "doc",
+          "id": "commands/variable-extract"
+        },
+        {
+          "type": "doc",
+          "id": "commands/if"
+        },
+        {
+          "type": "doc",
+          "id": "commands/if-pro"
+        },
+        {
+          "type": "doc",
+          "id": "commands/operation"
+        },
+        {
+          "type": "doc",
+          "id": "commands/run"
+        },
+        {
+          "type": "doc",
+          "id": "commands/file-io"
+        },
+        {
+          "type": "doc",
+          "id": "commands/text-ops"
+        },
+        {
+          "type": "doc",
+          "id": "commands/array"
+        },
+        {
+          "type": "doc",
+          "id": "commands/rmt-cmd"
+        },
+        {
+          "type": "doc",
+          "id": "commands/bg-mouse"
+        },
+        {
+          "type": "doc",
+          "id": "commands/bg-key"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "常见问题",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "faq/index"
+        },
+        {
+          "type": "doc",
+          "id": "faq/config-not-applied"
+        },
+        {
+          "type": "doc",
+          "id": "faq/in-game-invalid"
+        },
+        {
+          "type": "doc",
+          "id": "faq/cmd-lost"
+        },
+        {
+          "type": "doc",
+          "id": "faq/key-state"
+        },
+        {
+          "type": "doc",
+          "id": "faq/autostart"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "常见报错",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "errors/index"
+        },
+        {
+          "type": "doc",
+          "id": "errors/ocr-error"
+        },
+        {
+          "type": "doc",
+          "id": "errors/screenshot-error"
+        },
+        {
+          "type": "doc",
+          "id": "errors/unzip-error"
+        },
+        {
+          "type": "doc",
+          "id": "errors/save-error"
+        },
+        {
+          "type": "doc",
+          "id": "errors/migration-error"
+        },
+        {
+          "type": "doc",
+          "id": "errors/audio-error"
+        },
+        {
+          "type": "doc",
+          "id": "errors/excel-error"
+        },
+        {
+          "type": "doc",
+          "id": "errors/runtime-error-1"
+        },
+        {
+          "type": "doc",
+          "id": "errors/runtime-error-2"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "更新日志",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "changelog/index"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "开发指南",
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "dev/index"
+        },
+        {
+          "type": "doc",
+          "id": "dev/entry"
+        },
+        {
+          "type": "doc",
+          "id": "dev/ui-module"
+        },
+        {
+          "type": "doc",
+          "id": "dev/data-structure"
+        },
+        {
+          "type": "doc",
+          "id": "dev/macro-editor"
+        },
+        {
+          "type": "doc",
+          "id": "dev/hotkey"
+        },
+        {
+          "type": "doc",
+          "id": "dev/resource"
+        },
+        {
+          "type": "doc",
+          "id": "dev/add-command"
+        },
+        {
+          "type": "doc",
+          "id": "dev/debug"
+        }
+      ]
+    }
+  ]
+}

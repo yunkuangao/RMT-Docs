@@ -1,0 +1,13 @@
+---
+title: "🧵 线程 Worker (`Thread/`)"
+sidebar_position: 6
+---
+| 文件 | 说明 |
+|------|------|
+| `Work.ahk` | 工作脚本入口，编译为 `Work.exe` 用于并行执行宏 |
+| `WorkUtil.ahk` | Worker 工具函数（初始化、指令执行、通信） |
+| `WrokGlobalUtil.ahk` | Worker 全局配置与变量声明 |
+
+Worker 通过共享内存（`SharedMemory`）+ 环形缓冲区（`RingBuffer`）与主进程通信。
+
+---

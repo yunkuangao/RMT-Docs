@@ -1,0 +1,208 @@
+---
+title: "🧠 核心模块 (`Main/`)"
+sidebar_position: 4
+---
+### `GlobalUtil.ahk`
+**功能概述：**
+全局变量声明与模块引用中心。通过 `#Include` 串联所有核心模块和 GUI 模块。
+
+**职责内容：**
+- 声明 `MySoftData`、`MainSoftData` 等全局变量
+- `#Include` 所有核心模块（WorkPool, UIUtil, TimingUtil, BindUtil, VariableUtil 等）
+- `#Include` 所有 GUI 模块
+- `#Include` 部分插件（ViGEm, AHK-XAML, MacroGraph）
+
+---
+
+### `DataClass.ahk`
+**功能概述：**
+定义程序中用到的数据结构与宏指令的数据模型。
+
+**职责内容：**
+- `TableItem` — 主表格数据结构，含每个宏项的状态、触发键、循环次数等
+- `Timer` — 定时器/计划配置
+- `SoftData` / `MainConfig` — 全局配置对象（主题、快捷键映射、用户偏好设置）
+- 各类 `*Data` 类（`KeyboardData`, `SearchData`, `LoopData`, `RunData` 等）— 宏指令数据模型
+
+---
+
+### `AssetUtil.ahk`
+**功能概述：**
+统一管理资源（如图标、配置文件等）的加载、保存与转换。
+
+**职责内容：**
+- `InitFilePath()` — 初始化所有文件路径
+- 加载本地资源（图像、图标、模板等）
+- 保存用户生成的数据（宏配置文件）
+- 语言文件加载与切换
+
+---
+
+### `SelfCheck.ahk`
+**功能概述：**
+文件完整性自检工具。
+
+**职责内容：**
+- `SelfCheckMissingFiles()` — 检查关键依赖文件是否存在（OCR模型、DLL、音频等）
+- 若缺失则从 GitHub Releases 自动下载
+
+---
+
+### 工具模块 (`Main/Util/`)
+
+#### `MacroUtil.ahk` — ⭐ 核心宏执行逻辑
+**功能概述：**
+解析并执行宏指令。
+
+**职责内容：**
+- `OnTriggerMacroOnce(tableItem, macro, index)` — 触发并执行单条宏（拆分指令、遍历执行）
+- `ExecuteMacroCmdOnce(tableItem, cmdStr, index, graphNode)` — 执行单条宏指令
+- 所有指令类型的执行函数：`OnPressKey`, `OnInterval`, `OnSearchWrapper`, `OnMouseMove`, `OnRunFile`, `OnCompare`, `OnVariable`, `OnLoop` 等
+- 支持递归调用（循环、条件分支等）
+
+#### `MacroClipboardUtil.ahk`
+宏的复制、粘贴、导入导出操作。
+
+#### `GraphMacroUtil.ahk`
+流程图宏的执行逻辑。
+
+#### `JsonUtil.ahk`
+JSON 解析与序列化。
+
+#### `InputUtil.ahk`
+输入框验证与处理工具。
+
+#### `TextOpsUtil.ahk`
+文本处理指令的执行逻辑。
+
+#### `SearchUtil.ahk`
+图片搜索指令的执行逻辑（调用 OpenCV 插件）。
+
+#### `CompareUtil.ahk`
+条件比较指令的工具函数。
+
+#### `ExcelUtil.ahk`
+Excel 文件读写工具。
+
+#### `FileIOUtil.ahk`
+文件读写指令的执行逻辑。
+
+#### `ExpressUtil.ahk`
+表达式计算引擎。
+
+#### `LangUtil.ahk`
+国际化工具（加载语言文件、翻译字符串）。
+
+#### `FixCompatUtil.ahk`
+旧版本配置文件的迁移改写（入口 `Gui/SettingMgrGui.ahk`）。仅主程序加载，由 `Main/GlobalUtil.ahk` 引入，Worker 不加载。新增迁移函数请放这里。
+
+#### `CompatDataUtil.ahk`
+内存数据结构的旧版本字段补齐（`Compat1_0_8F4FlodInfo`、`CompatEnsureArrLength`）。主程序与 Worker 共用，由 `Main/AssetUtil.ahk` 引入，因此不可引用主程序专属函数。
+
+#### `Gdip_All.ahk`
+GDI+ 图像处理库。
+
+#### `HumanMouse.ahk`
+人类化鼠标移动算法。
+
+#### `PresssKeyUtil.ahk`
+底层按键模拟工具。
+
+#### `ArrayUtil.ahk`
+数组操作工具函数。
+
+#### `SerialUtil.ahk`
+指令序列化标识管理（`GetCMDSerialStr`）。
+
+#### `RingBuffer.ahk`
+环形缓冲区（用于 Worker 进程通信）。
+
+#### `SharedMemory.ahk`
+共享内存封装（用于 Worker 进程通信）。
+
+#### `PluginUtil.ahk`
+插件加载与管理。
+
+#### `ErrorHandler.ahk`
+全局错误处理与报告。
+
+#### `MergeUtil.ahk`
+配置合并工具。
+
+---
+
+### 其他核心模块
+
+#### `WorkPool.ahk`
+**功能概述：**
+多线程 Worker 池管理。
+
+**职责内容：**
+- `TaskQueue` — 任务队列
+- `WorkerData` — Worker 进程数据封装
+- Worker 进程的创建、销毁、任务分发
+- 通过共享内存 + 环形缓冲区与 Worker 通信
+
+#### `BindUtil.ahk`
+**功能概述：**
+全局热键注册与触发路由。
+
+**职责内容：**
+- `BindKey()` — 绑定所有快捷键
+- `BindShortcut()` — 注册单个热键/热字串
+- `InitTriggerKeyMap()` — 初始化触发键映射
+- 暂停/终止/截图/自由粘贴等工具热键
+
+#### `UIUtil.ahk`
+**功能概述：**
+主窗口 UI 模板，负责构建和控制所有主窗口相关的 UI 元素。
+
+#### `TimingUtil.ahk`
+**功能概述：**
+定时/计划宏的调度与执行。
+
+**职责内容：**
+- `TimingScheduler` — 定时调度器类
+- 支持按时间、间隔、系统启动等多种触发方式
+
+#### `VariableUtil.ahk`
+**功能概述：**
+变量管理与替换引擎。
+
+**职责内容：**
+- 系统变量与用户变量的读取/写入
+- 宏文本中的变量替换
+- 支持 `{变量名}` 语法
+
+#### `RecordUtil.ahk`
+**功能概述：**
+键盘/鼠标宏录制。
+
+**职责内容：**
+- 底层原始输入（Raw Input）监听
+- 按键/鼠标动作捕获与序列化
+
+#### `RecordJoyUtil.ahk`
+**功能概述：**
+手柄宏录制。
+
+#### `JoyMacro.ahk`
+**功能概述：**
+手柄宏支持（按键映射、轴处理）。
+
+#### `TriggerKeyData.ahk`
+**功能概述：**
+触发键数据结构定义。
+
+**职责内容：**
+- `TriggerKeyData` 类 — 管理单个按键的多种触发方式（按下、松开、长按、双击、开关等）
+
+#### `WindowHotkeyManager.ahk`
+**功能概述：**
+窗口热键管理器（为指定窗口绑定热键）。
+
+#### `FolderPackager.ahk`
+**功能概述：**
+文件夹打包工具（用于导出配置）。
+
+---

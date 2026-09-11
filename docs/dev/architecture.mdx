@@ -1,0 +1,22 @@
+---
+title: "📂 项目总体架构"
+sidebar_position: 2
+---
+```
+用户操作 / 热键触发
+    ↓
+BindUtil.ahk (热键路由)
+    ↓
+MacroUtil.ahk.OnTriggerMacroOnce (指令解析 & 分发)
+    ↓
+ExecuteMacroCmdOnce (单条指令执行)
+    ├─ 键盘/鼠标/手柄模拟
+    ├─ 图片识别 (OpenCV)
+    ├─ 文字识别 (RapidOcr)
+    ├─ 循环/条件判断
+    ├─ 运行程序/脚本
+    └─ 其他指令...
+支持多线程: WorkPool.ahk → Thread/Work.exe (独立进程)
+```
+
+---

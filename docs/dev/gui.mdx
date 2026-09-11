@@ -1,0 +1,72 @@
+---
+title: "🖥️ GUI 模块 (`Gui/`)"
+sidebar_position: 5
+---
+### `MacroEditGui.ahk`
+**功能概述：**
+主宏编辑器，支持用户自定义宏逻辑。
+
+**职责内容：**
+- 编辑界面的布局与控件初始化
+- 支持多步骤宏指令添加/插入/删除等
+- 提供"录制按键"、"调试"等便捷功能
+- 各类指令的按钮入口
+
+### 流程图编辑器 (`MacroGraph/`)
+**功能概述：**
+可视化流程图宏编辑与执行模块，包含 12 个文件：
+
+| 文件 | 职责 |
+|------|------|
+| `MacroGraphGui.ahk` | 主界面 |
+| `MacroGraphData.ahk` | 数据结构 |
+| `MacroGraphNodeUI.ahk` | 节点 UI 渲染 |
+| `MacroGraphConnections.ahk` | 连线管理 |
+| `MacroGraphEvents.ahk` | 事件处理 |
+| `MacroGraphFormal.ahk` | 格式化/布局 |
+| `MacroGraphFormalHandlers.ahk` | 格式化事件处理 |
+| `MacroGraphHandlers.ahk` | 通用事件处理 |
+| `MacroGraphEdit.ahk` | 编辑功能 |
+| `MacroGraphBranch.ahk` | 分支逻辑 |
+| `MacroGraphIfPro.ahk` | 条件判断节点 |
+| `MacroGraphMenu.ahk` | 右键菜单 |
+
+### 指令编辑 GUI（部分列举）
+
+| 文件 | 编辑功能 |
+|------|---------|
+| `KeyGui.ahk` | 按键指令编辑 |
+| `BGKeyGui.ahk` | 后台按键编辑 |
+| `BGMouseGui.ahk` | 后台鼠标编辑 |
+| `SearchGui.ahk` | 图片搜索编辑 |
+| `SearchProGui.ahk` | 专业搜索编辑 |
+| `LoopGui.ahk` | 循环指令编辑 |
+| `RunGui.ahk` | 运行文件编辑 |
+| `CompareGui.ahk` | 条件比较编辑 |
+| `CompareProGui.ahk` | 专业比较编辑 |
+| `TextOpsGui.ahk` | 文本处理编辑 |
+| `ArrayGui.ahk` | 数组操作编辑 |
+| `InputGui.ahk` | 输入指令编辑 |
+| `FileIOGui.ahk` | 文件读写编辑 |
+| `VariableGui.ahk` | 变量编辑 |
+| `ExVariableGui.ahk` | 变量提取编辑 |
+| `OperationGui.ahk` | 运算编辑 |
+| `UIMacroGui.ahk` | UI 宏编辑 |
+| `MouseMoveGui.ahk` | 鼠标移动编辑 |
+| `MMProGui.ahk` | 专业鼠标移动编辑 |
+| `KeyCheckGui.ahk` | 按键检测编辑 |
+| `OutputGui.ahk` | 输出指令编辑 |
+| `SubMacroGui.ahk` | 子宏调用编辑 |
+| `WindowManageGui.ahk` | 窗口管理编辑 |
+| `ScreenShotGui.ahk` | 截图指令编辑 |
+| `CommentGui.ahk` | 注释编辑 |
+| `TimingGui.ahk` | 定时设置编辑 |
+| `TriggerKeyGui.ahk` | 触发按键配置 |
+| `TriggerStrGui.ahk` | 触发字串配置 |
+| `MenuWheelGui.ahk` | 菜单滚轮设置 |
+| `FreePasteGui.ahk` | 自由粘贴设置 |
+| `SettingMgrGui.ahk` | 配置管理 |
+| `VarListenGui.ahk` | 变量监听 |
+| `RMTCMDGui.ahk` | RMT 命令 |
+
+---
