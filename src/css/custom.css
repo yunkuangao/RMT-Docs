@@ -28,3 +28,12 @@
   --ifm-color-primary-lightest: #dfe4fe;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* 离线版导航栏上的版本号标记 */
+.navbar__version-badge {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.75rem;
+  padding: 0.1rem 0.45rem;
+}

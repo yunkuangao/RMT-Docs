@@ -71,6 +71,22 @@ npm run docs:version 1.3.0
 它会把 `docs/` 复制成 `versioned_docs/version-1.3.0/`，并更新 `versions.json` 和版本下拉。
 之后 `docs/` 继续作为下一版在开发的内容。
 
+## 离线版（打包进 RMT）
+
+产物能用 `file://` 双击打开，靠的是官方 hash 路由（`future.experimental_router: 'hash'`）：
+关掉 SSG、只产出一个 `index.html`、路由走 `/#/xxx`。配置见 `docusaurus.offline.config.ts`。
+
+```bash
+npm run build:offline              # 默认：最新已发布版本
+npm run build:offline -- 1.1.2     # 指定版本
+npm run build:offline -- -v next   # docs/（未发布的开发版）
+```
+
+产物在 `build-offline/`。手动把里面**的内容**复制到主仓库 `Web\OfflineDocs\`
+（没有就新建），`PackRMT.ps1` 会把它打进 `Release\Docs`。
+
+离线版**没有搜索**：本地搜索插件是 fetch 加载 json 索引，`file://` 下被 CORS 拦，构建时已关掉。
+
 ## 搜索
 
 用 `@easyops-cn/docusaurus-search-local`：纯本地离线索引，不依赖 Algolia，
