@@ -65,8 +65,19 @@ const offlineConfig: Config = {
 
   noIndex: true,
 
-  // 本地搜索插件的索引是 json + fetch 加载，file:// 下会被 CORS 拦掉，离线版直接关掉。
+  // 在线那套 @easyops-cn/docusaurus-search-local 在离线版用不了：
+  // 索引是在 Web Worker 里 fetch 的 json，file:// 下 new Worker 和 fetch 都会被浏览器拒。
+  // 所以离线版把插件摘掉，换成自己的 plugins/offline-search：
+  // 索引写成普通 <script src> 加载的全局变量（经典脚本不受 file:// 跨域限制）+ 自带搜索框。
   themes: [],
+
+  plugins: [
+    ...(base.plugins ?? []),
+    [
+      path.join(siteDir, 'plugins', 'offline-search'),
+      {docsPath, versionLabel},
+    ],
+  ],
 
   presets: [
     [
