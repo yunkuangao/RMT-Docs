@@ -46,6 +46,12 @@ if (!fs.existsSync(path.join(siteDir, docsPath))) {
   throw new Error(`[build:offline] 文档目录不存在: ${docsPath}`);
 }
 
+// 更新日志是独立实例（/changelog），离线包不带它，把对应插件过滤掉。
+// 注意过滤要在展开 base.plugins 之前做，否则离线产物里会多出 /changelog 路由。
+const basePlugins = ((base.plugins ?? []) as any[]).filter(
+  (p: any) => !(Array.isArray(p) && p[1]?.id === 'changelog'),
+);
+
 const sidebarId: string =
   (base.themeConfig?.navbar?.items ?? []).find((i: any) => i.type === 'docSidebar')?.sidebarId ??
   'rmtSidebar';
@@ -72,7 +78,7 @@ const offlineConfig: Config = {
   themes: [],
 
   plugins: [
-    ...(base.plugins ?? []),
+    ...basePlugins,
     [
       path.join(siteDir, 'plugins', 'offline-search'),
       {docsPath, versionLabel},

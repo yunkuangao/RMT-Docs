@@ -288,66 +288,9 @@
       ]
     },
     {
-      "type": "category",
-      "label": "更新日志",
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "changelog/index"
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "label": "开发指南",
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "dev/index"
-        },
-        {
-          "type": "doc",
-          "id": "dev/architecture"
-        },
-        {
-          "type": "doc",
-          "id": "dev/entry"
-        },
-        {
-          "type": "doc",
-          "id": "dev/core-main"
-        },
-        {
-          "type": "doc",
-          "id": "dev/gui"
-        },
-        {
-          "type": "doc",
-          "id": "dev/thread-worker"
-        },
-        {
-          "type": "doc",
-          "id": "dev/plugins"
-        },
-        {
-          "type": "doc",
-          "id": "dev/i18n"
-        },
-        {
-          "type": "doc",
-          "id": "dev/resources"
-        },
-        {
-          "type": "doc",
-          "id": "dev/add-command"
-        },
-        {
-          "type": "doc",
-          "id": "dev/debug"
-        }
-      ]
+      "type": "doc",
+      "id": "dev/index",
+      "label": "开发指南"
     }
   ]
 }

@@ -29,9 +29,18 @@ docs/
   commands/            指令手册
   faq/                 常见问题
   errors/              常见报错
-  changelog/           更新日志
   dev/                 开发指南
 ```
+
+**更新日志不在版本里**，所以不放 `docs/`。它单独放在项目根的 `changelog/`，
+由 `docusaurus.config.ts` 里一个独立的 docs 实例（`id: 'changelog'`，
+`routeBasePath: /changelog`）承载：全站只有一份、不随版本快照走、导航栏单独一个入口。
+离线包也不需要它——`docusaurus.offline.config.ts` 会把这个实例过滤掉。
+
+**开发指南也不拆页**：`dev/index.mdx` 一篇就是全部内容（`convert-web.mjs` 里设了
+`split: false`，标题层级直接用源文档的 `## / ###`）。分类只有一个页面时，
+`_category_.json` 带 `link`、版本快照在 `versioned_sidebars` 里写成单个 `doc` 项，
+这样侧边栏点分类名直接打开，不会多出一层「分类 > 同名页面」。
 
 图片按版本放在 `static/img/latest/`、`static/img/1.2.2/`、`static/img/1.1.2/`，
 正文里写 `/img/latest/MacroCMD/Key.png` 这种绝对路径。
@@ -60,6 +69,14 @@ node scripts/convert-web.mjs
 并重写 `versioned_sidebars`。章节名的英文文件名写在脚本的 `SLUGS` 表里，
 没写到的章节会直接用中文标题当文件名。
 
+发布包源 md 里有几处固定笔误（如 `PresssKeyUtil`、`WrokGlobalUtil`、「识别的的文本」），
+脚本的 `TEXT_FIXES` 表会在转换时统一改掉——**源文件不用动，重导也不会再把错字带回来**。
+新发现源文件里的笔误，往这张表里加一行即可。
+
+注意：脚本只负责「转换 + 去笔误」。之前对已生成页面做过的整理（标题层级统一、
+清理页面末尾残留的 `---`、补写分类首页导览、`variable-extract` 的引号/表格重写）
+不在脚本里，重导后需要重跑整理流程。
+
 ## 发一个新版本
 
 内容写完、确认 `docs/` 就是这一版的样子后：
@@ -85,7 +102,10 @@ npm run build:offline -- -v next   # docs/（未发布的开发版）
 产物在 `build-offline/`。手动把里面**的内容**复制到主仓库 `Web\OfflineDocs\`
 （没有就新建），`PackRMT.ps1` 会把它打进 `Release\Docs`。
 
-离线版**没有搜索**：本地搜索插件是 fetch 加载 json 索引，`file://` 下被 CORS 拦，构建时已关掉。
+离线版自带一套本地搜索（`plugins/offline-search/`）：索引在构建时写成普通 `<script src>`
+加载的全局变量，不 fetch、不起 Web Worker，`file://` 下可用。在线那套插件在离线配置里被换掉了。
+
+离线版**不含更新日志**：`/changelog` 是独立于版本的页面，只在在线站点提供。
 
 ## 搜索
 
@@ -105,7 +125,7 @@ npm run build && npm run serve
 ## 说明
 
 - 模板自带的示例内容（教程、博客、示例首页组件）、两个版本的原始 `Web/` 源、调试日志都放在 `_demo-template/`，不参与构建，也已加入 `.gitignore` 不入库，确认不需要后可删。
-- `blog` 插件当前关闭，需要更新日志时再打开。
+- `blog` 插件关闭。更新日志不走 blog，它是根目录 `changelog/` 下的独立 docs 实例。
 - 站点标题、导航、页脚、主题色分别在 `docusaurus.config.ts` 与 `src/css/custom.css`。
 - 本机 dev 模式（`npm run start`）返回的页面是客户端渲染的空壳，直接刷新 `/docs/...`
   这类子路由会 404，写文档时用首页进入、或直接用 `build + serve` 预览。

@@ -1,4 +1,8 @@
 {
   "label": "开发指南",
-  "position": 8
+  "position": 8,
+  "link": {
+    "type": "doc",
+    "id": "dev/index"
+  }
 }

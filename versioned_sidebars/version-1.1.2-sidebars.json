@@ -260,58 +260,9 @@
       ]
     },
     {
-      "type": "category",
-      "label": "更新日志",
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "changelog/index"
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "label": "开发指南",
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "dev/index"
-        },
-        {
-          "type": "doc",
-          "id": "dev/entry"
-        },
-        {
-          "type": "doc",
-          "id": "dev/ui-module"
-        },
-        {
-          "type": "doc",
-          "id": "dev/data-structure"
-        },
-        {
-          "type": "doc",
-          "id": "dev/macro-editor"
-        },
-        {
-          "type": "doc",
-          "id": "dev/hotkey"
-        },
-        {
-          "type": "doc",
-          "id": "dev/resource"
-        },
-        {
-          "type": "doc",
-          "id": "dev/add-command"
-        },
-        {
-          "type": "doc",
-          "id": "dev/debug"
-        }
-      ]
+      "type": "doc",
+      "id": "dev/index",
+      "label": "开发指南"
     }
   ]
 }

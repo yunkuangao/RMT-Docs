@@ -50,6 +50,22 @@ const config: Config = {
     ],
   ],
 
+  // 更新日志不随版本走：单独一个 docs 实例，全站只有一份，不进版本下拉。
+  // 版本化只作用于上面的 preset docs，不会碰这个实例；离线包也不含它
+  // （见 docusaurus.offline.config.ts 里的插件过滤）。
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'changelog',
+        path: 'changelog',
+        routeBasePath: 'changelog',
+        // 单页文档，不需要侧边栏
+        sidebarPath: false,
+      },
+    ],
+  ],
+
   // 全局搜索：纯本地离线索引，中文用 jieba 分词，多版本文档一起索引
   // 选项见 https://github.com/easyops-cn/docusaurus-search-local
   themes: [
@@ -60,7 +76,8 @@ const config: Config = {
         language: ['zh', 'en'],
         indexDocs: true,
         indexBlog: false,
-        docsRouteBasePath: '/docs',
+        // /docs 是各版本文档，/changelog 是不分版本的更新日志
+        docsRouteBasePath: ['/docs', '/changelog'],
         // 结果里显示所属版本/路径
         explicitSearchResultPath: true,
         highlightSearchTermsOnTargetPage: true,
@@ -89,6 +106,11 @@ const config: Config = {
           sidebarId: 'rmtSidebar',
           position: 'left',
           label: '使用文档',
+        },
+        {
+          to: '/changelog/',
+          label: '更新日志',
+          position: 'left',
         },
         {
           type: 'docsVersionDropdown',
