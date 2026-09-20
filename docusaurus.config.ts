@@ -35,6 +35,9 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          // 在线文档直接部署在域名根路径：/、/commands/、/1.2.2/...。
+          // 历史版本会自动以 /<版本号>/ 为前缀，不再额外包含 /docs/。
+          routeBasePath: '/',
           // 版本下拉里，"当前开发版" 显示的标签
           versions: {
             current: {
@@ -76,8 +79,8 @@ const config: Config = {
         language: ['zh', 'en'],
         indexDocs: true,
         indexBlog: false,
-        // /docs 是各版本文档，/changelog 是不分版本的更新日志
-        docsRouteBasePath: ['/docs', '/changelog'],
+        // / 是各版本文档，/changelog 是不分版本的更新日志
+        docsRouteBasePath: ['/', '/changelog'],
         // 结果里显示所属版本/路径
         explicitSearchResultPath: true,
         highlightSearchTermsOnTargetPage: true,
@@ -126,15 +129,15 @@ const config: Config = {
           items: [
             {
               label: '使用文档',
-              to: '/docs/',
+              to: '/',
             },
             {
               label: '指令手册',
-              to: '/docs/commands/',
+              to: '/commands/',
             },
             {
               label: '常见问题',
-              to: '/docs/faq/',
+              to: '/faq/',
             },
           ],
         },

@@ -160,9 +160,9 @@
 
   // ---------- 跳转 ----------
 
-  // 站内链接走 hash 路由：#/docs/xxx
+  // 站内链接走 hash 路由：#/xxx
   function permalinkHash(permalink) {
-    return '#' + (permalink || '/docs/');
+    return '#' + (permalink || '/');
   }
 
   var pendingHeading = '';

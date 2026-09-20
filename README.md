@@ -101,11 +101,12 @@ npm run build:offline:next         # docs/，未发布的开发版
 
 用 `@easyops-cn/docusaurus-search-local`，纯本地索引、不依赖 Algolia，中文走 jieba 分词，配置在 `docusaurus.config.ts` 的 `themes` 段。
 
-**索引只在 `npm run build` 时生成**，`npm run start` 下搜索框点开没有结果，要看效果必须 `npm run build && npm run serve`。索引产物：`build/search-index.json`（当前版本）、`build/docs/<版本>/search-index.json`（历史版本），即浏览哪个版本就搜哪个版本。
+**索引只在 `npm run build` 时生成**，`npm run start` 下搜索框点开没有结果，要看效果必须 `npm run build && npm run serve`。索引产物：`build/search-index.json`（当前版本）、`build/<版本>/search-index.json`（历史版本），即浏览哪个版本就搜哪个版本。
 
 ## 其他
 
-- `npm run start` 返回的是客户端渲染空壳，直接刷新 `/docs/...` 这类子路由会 404，写文档用首页进入、或直接用 `build + serve` 预览。
-- 站点标题、导航、页脚在 `docusaurus.config.ts`，主题色在 `src/css/custom.css`，首页在 `src/pages/index.tsx`。
+- 在线文档部署在域名根路径：默认发布版本的入口是 `/`，例如 `/commands/`；其他历史版本是 `/<版本号>/`，例如 `/1.1.2/commands/`，开发中的「最新版」是 `/next/`。因此配置 `https://docs.ruomengtu.com` 后，无需保留 `/docs/`。
+- `npm run start` 返回的是客户端渲染空壳，直接刷新 `/commands/...` 这类子路由会 404，写文档从根路径进入、或直接用 `build + serve` 预览。
+- 站点标题、导航、页脚在 `docusaurus.config.ts`，主题色在 `src/css/custom.css`。
 - `blog` 已关闭，更新日志不走 blog。
 - `_demo-template/` 用于归档模板示例、原始 `Web/` 源和调试日志，不参与构建，已在 `.gitignore` 里，确认不需要可删。
