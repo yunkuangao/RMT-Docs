@@ -6,27 +6,530 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #4a6cf7;
-  --ifm-color-primary-dark: #3455e0;
-  --ifm-color-primary-darker: #2f4fd6;
-  --ifm-color-primary-darkest: #2741b1;
-  --ifm-color-primary-light: #6180f8;
-  --ifm-color-primary-lighter: #6d8af9;
-  --ifm-color-primary-lightest: #93a9fa;
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #172554;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #dbeafe;
+  --ifm-background-color: #fffdf9;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-font-color-base: #20263a;
+  --ifm-heading-color: #172554;
+  --ifm-link-color: #2563eb;
+  --ifm-menu-color-active: #1d4ed8;
+  --ifm-menu-color-background-active: #eef6ff;
+  --ifm-table-border-color: #e8e3dc;
+  --ifm-toc-border-color: #e6e2dd;
+  --rmt-mint: #12b981;
+  --rmt-mint-pale: #e7f9f1;
+  --rmt-sun: #f59e0b;
+  --rmt-sun-pale: #fff7df;
+  --rmt-ink: #20263a;
+  --rmt-muted: #687086;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #7f92fb;
-  --ifm-color-primary-dark: #5f77f9;
-  --ifm-color-primary-darker: #4f69f8;
-  --ifm-color-primary-darkest: #2040f5;
-  --ifm-color-primary-light: #9fadfc;
-  --ifm-color-primary-lighter: #afbbfd;
-  --ifm-color-primary-lightest: #dfe4fe;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #7db2ff;
+  --ifm-color-primary-dark: #589bff;
+  --ifm-color-primary-darker: #3d8bff;
+  --ifm-color-primary-darkest: #0968d8;
+  --ifm-color-primary-light: #9ac4ff;
+  --ifm-color-primary-lighter: #b8d6ff;
+  --ifm-color-primary-lightest: #e2efff;
+  --ifm-background-color: #101827;
+  --ifm-background-surface-color: #182235;
+  --ifm-font-color-base: #dbe6f4;
+  --ifm-heading-color: #f5f8fc;
+  --ifm-link-color: #8bb8ff;
+  --ifm-menu-color: #c5d0e0;
+  --ifm-menu-color-active: #6ee7bd;
+  --ifm-menu-color-background-active: #153e35;
+  --ifm-table-border-color: #334155;
+  --ifm-toc-border-color: #344155;
+  --rmt-mint: #35d39e;
+  --rmt-mint-pale: #143b32;
+  --rmt-sun: #f7bd3c;
+  --rmt-sun-pale: #403519;
+  --rmt-ink: #f5f8fc;
+  --rmt-muted: #a9b7cc;
+  --docusaurus-highlighted-code-line-bg: rgba(125, 178, 255, 0.16);
+}
+
+/* 页面骨架：用浅暖底色承托内容，彩色只用于层级和操作反馈。 */
+body {
+  background: var(--ifm-background-color);
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.91);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 22px rgba(30, 41, 59, 0.06);
+  backdrop-filter: blur(14px);
+}
+
+.navbar__title {
+  color: var(--rmt-ink);
+  letter-spacing: 0.02em;
+}
+
+.navbar__link--active,
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+.main-wrapper {
+  background: transparent;
+}
+
+/* 文档正文 */
+.theme-doc-markdown {
+  font-size: 1.02rem;
+  line-height: 1.9;
+}
+
+.theme-doc-markdown h1 {
+  color: var(--rmt-ink);
+  font-size: clamp(2rem, 4vw, 2.65rem);
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  margin-bottom: 1.15rem;
+}
+
+.theme-doc-markdown h1::after {
+  background: #d49a2a;
+  content: '';
+  display: block;
+  height: 2px;
+  margin-top: 1rem;
+  width: min(100%, 42rem);
+}
+
+.theme-doc-markdown h2 {
+  align-items: center;
+  border-bottom: 1px solid #eee7dd;
+  color: #173b72;
+  display: flex;
+  font-size: 1.48rem;
+  gap: 0.6rem;
+  margin-top: 2.8rem;
+  padding-bottom: 0.65rem;
+}
+
+.theme-doc-markdown h2::before {
+  background: #0f766e;
+  border-radius: 99px;
+  content: '';
+  flex: 0 0 auto;
+  height: 0.6rem;
+  width: 0.6rem;
+}
+
+.theme-doc-markdown h3 {
+  color: #137a5d;
+  font-size: 1.14rem;
+  margin-top: 2rem;
+}
+
+.theme-doc-markdown p,
+.theme-doc-markdown li {
+  color: #343b4d;
+}
+
+.theme-doc-markdown strong {
+  color: #172554;
+}
+
+.theme-doc-markdown a {
+  font-weight: 600;
+  text-decoration-color: rgba(37, 99, 235, 0.35);
+  text-underline-offset: 0.16em;
+}
+
+.theme-doc-markdown a:hover {
+  color: #db2777;
+  text-decoration-color: currentColor;
+}
+
+.theme-doc-markdown table {
+  border: 1px solid #eadfca;
+  border-radius: 0.85rem;
+  box-shadow: 0 10px 26px rgba(101, 78, 37, 0.06);
+  display: table;
+  overflow: hidden;
+}
+
+.theme-doc-markdown thead tr {
+  background: #fff3d9;
+}
+
+.theme-doc-markdown th {
+  color: #714d03;
+  font-weight: 700;
+}
+
+.theme-doc-markdown tr:nth-child(even) {
+  background: #fffdf8;
+}
+
+.theme-doc-markdown tr:hover {
+  background: #fdf3f8;
+}
+
+.theme-doc-markdown code {
+  background: #f1efff;
+  border: 1px solid #cfc6f5;
+  border-radius: 0.35rem;
+  color: #07634d;
+  font-weight: 700;
+  margin-inline: 0.14em;
+  padding: 0.12rem 0.36rem;
+}
+
+.theme-doc-markdown pre {
+  border: 1px solid #dce5f5;
+  border-radius: 0.85rem;
+  box-shadow: 0 10px 24px rgba(30, 64, 175, 0.09);
+}
+
+.theme-doc-markdown pre code {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-weight: inherit;
+  margin-inline: 0;
+  padding: 0;
+}
+
+.theme-doc-markdown blockquote {
+  background: #edf9f5;
+  border-left: 4px solid var(--rmt-mint);
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: #315a52;
+  padding: 0.85rem 1rem;
+}
+
+.theme-doc-markdown img {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clear: both;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* 左侧目录 */
+.theme-doc-sidebar-container {
+  background: rgba(255, 255, 255, 0.8);
+  border-right: 1px solid #e7e2da;
+}
+
+.theme-doc-sidebar-menu .menu__link {
+  border-radius: 0.55rem;
+  margin: 0.1rem 0.45rem;
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.theme-doc-sidebar-menu .menu__link:hover {
+  background: #f6eee5;
+  color: #805a3c;
+}
+
+.theme-doc-sidebar-menu .menu__link--active {
+  background: #e9f8f0;
+  box-shadow: inset 3px 0 0 var(--rmt-mint);
+  color: #08795a;
+  font-weight: 700;
+}
+
+/* 为问题与报错条目补足语义图标，历史版本链接同样按 URL 后缀匹配。 */
+.theme-doc-sidebar-menu .menu__link[href*='/faq/']:not([href$='/faq/']),
+.theme-doc-sidebar-menu .menu__link[href*='/errors/']:not([href$='/errors/']) {
+  align-items: center;
+  display: flex;
+  gap: 0.42rem;
+}
+
+.theme-doc-sidebar-menu .menu__link[href*='/faq/']:not([href$='/faq/'])::before,
+.theme-doc-sidebar-menu .menu__link[href*='/errors/']:not([href$='/errors/'])::before {
+  content: var(--sidebar-item-icon);
+  flex: 0 0 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-align: center;
+  width: 1.1rem;
+}
+
+.theme-doc-sidebar-menu .menu__link[href$='/faq/config-not-applied'] { --sidebar-item-icon: '⚙'; }
+.theme-doc-sidebar-menu .menu__link[href$='/faq/in-game-invalid'] { --sidebar-item-icon: '🎮'; }
+.theme-doc-sidebar-menu .menu__link[href$='/faq/key-state'] { --sidebar-item-icon: '⌨'; }
+.theme-doc-sidebar-menu .menu__link[href$='/faq/logitech'] { --sidebar-item-icon: '🖱'; }
+.theme-doc-sidebar-menu .menu__link[href$='/faq/partial-key-invalid'] { --sidebar-item-icon: '⌨'; }
+.theme-doc-sidebar-menu .menu__link[href$='/faq/side-button'] { --sidebar-item-icon: '🖱'; }
+.theme-doc-sidebar-menu .menu__link[href$='/faq/suddenly-invalid'] { --sidebar-item-icon: '⚡'; }
+.theme-doc-sidebar-menu .menu__link[href$='/faq/cmd-lost'] { --sidebar-item-icon: '📋'; }
+.theme-doc-sidebar-menu .menu__link[href$='/errors/audio-error'] { --sidebar-item-icon: '🔊'; }
+.theme-doc-sidebar-menu .menu__link[href$='/errors/excel-error'] { --sidebar-item-icon: '📊'; }
+.theme-doc-sidebar-menu .menu__link[href$='/errors/migration-error'] { --sidebar-item-icon: '🔄'; }
+.theme-doc-sidebar-menu .menu__link[href$='/errors/runtime-error-1'] { --sidebar-item-icon: '⚠'; }
+.theme-doc-sidebar-menu .menu__link[href$='/errors/runtime-error-2'] { --sidebar-item-icon: '⚠'; }
+.theme-doc-sidebar-menu .menu__link[href$='/errors/runtime-error-3'] { --sidebar-item-icon: '⚠'; }
+
+/* 首页说明：加强第一段的阅读层级，并把入口整理成轻量卡片。 */
+html.docs-doc-id-intro .theme-doc-markdown > p:first-of-type {
+  color: #4c586d;
+  font-size: 1.13rem;
+  letter-spacing: 0.01em;
+  line-height: 2;
+  margin-bottom: 1.5rem;
+  max-width: 49rem;
+}
+
+html.docs-doc-id-intro .theme-doc-markdown > ul {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+}
+
+html.docs-doc-id-intro .theme-doc-markdown > ul li {
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid #e8e7df;
+  border-radius: 0.75rem;
+  box-shadow: 0 5px 15px rgba(42, 62, 85, 0.04);
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+}
+
+html.docs-doc-id-intro .theme-doc-markdown > ul li::before {
+  color: var(--rmt-sun);
+  content: '●';
+  font-size: 0.62rem;
+  margin-right: 0.5rem;
+  vertical-align: 0.08rem;
+}
+
+/* “选版本”提示：修正其作为纯文本渲染的问题后，提供明确但不过度抢眼的提示块。 */
+.theme-admonition.theme-admonition-tip {
+  --ifm-alert-background-color: #effaf5;
+  --ifm-alert-border-color: #9cdec6;
+  --ifm-alert-foreground-color: #08795a;
+  background: #effaf5;
+  border: 1px solid #9cdec6;
+  border-left: 4px solid var(--rmt-mint);
+  border-radius: 0.8rem;
+  box-shadow: 0 8px 18px rgba(12, 123, 91, 0.08);
+  color: #285c4c;
+  padding: 1rem 1.1rem;
+  margin-top: 2.4rem;
+}
+
+.theme-admonition.theme-admonition-tip [class*='admonitionHeading'] {
+  color: #08795a;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+}
+
+.theme-admonition.theme-admonition-tip [class*='admonitionContent'] {
+  line-height: 1.8;
+}
+
+/* 指令手册使用宏编辑器一致的图标；URL 后缀兼容各历史版本。 */
+.theme-doc-sidebar-menu .menu__link[href*='/commands/']:not([href$='/commands/']) {
+  align-items: center;
+  display: flex;
+  gap: 0.42rem;
+}
+
+.theme-doc-sidebar-menu .menu__link[href*='/commands/']:not([href$='/commands/'])::before {
+  background: center / contain no-repeat var(--command-icon);
+  content: '';
+  flex: 0 0 1.1rem;
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+.theme-doc-sidebar-menu .menu__link[href$='/commands/interval'] { --command-icon: url('/img/command-icons/Interval.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/key'] { --command-icon: url('/img/command-icons/Key.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/search'] { --command-icon: url('/img/command-icons/Search.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/search-pro'] { --command-icon: url('/img/command-icons/SearchPro.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/move'] { --command-icon: url('/img/command-icons/Move.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/move-pro'] { --command-icon: url('/img/command-icons/MovePro.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/input'] { --command-icon: url('/img/command-icons/Input.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/output'] { --command-icon: url('/img/command-icons/Output.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/loop'] { --command-icon: url('/img/command-icons/Loop.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/macro-op'] { --command-icon: url('/img/command-icons/Sub.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/variable'] { --command-icon: url('/img/command-icons/Var.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/variable-extract'] { --command-icon: url('/img/command-icons/Extract.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/if'] { --command-icon: url('/img/command-icons/If.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/if-pro'] { --command-icon: url('/img/command-icons/IfPro.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/operation'] { --command-icon: url('/img/command-icons/Operation.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/run'] { --command-icon: url('/img/command-icons/Run.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/file-io'] { --command-icon: url('/img/command-icons/FileIO.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/text-ops'] { --command-icon: url('/img/command-icons/TextOps.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/array'] { --command-icon: url('/img/command-icons/Arr.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/rmt-cmd'] { --command-icon: url('/img/command-icons/rabit.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/bg-mouse'] { --command-icon: url('/img/command-icons/Mouse.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/bg-key'] { --command-icon: url('/img/command-icons/Key.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/window-manage'] { --command-icon: url('/img/command-icons/WindowManage.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/key-check'] { --command-icon: url('/img/command-icons/KeyCheck.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/remark'] { --command-icon: url('/img/command-icons/Comment.png'); }
+.theme-doc-sidebar-menu .menu__link[href$='/commands/shot'] { --command-icon: url('/img/command-icons/ScreenShot.png'); }
+
+/* 右侧目录沿用温和的绿色定位，不与正文争夺注意力。 */
+.table-of-contents__link--active {
+  border-left-color: #2563eb;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.table-of-contents__link:hover {
+  color: #805a3c;
+}
+
+/* 暗色主题：统一使用深蓝灰底、浅色正文、蓝色链接与薄荷绿状态色。 */
+[data-theme='dark'] .navbar {
+  background: rgba(16, 24, 39, 0.94);
+  border-bottom-color: #2a3850;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+}
+
+[data-theme='dark'] .theme-doc-markdown h1 {
+  color: var(--rmt-ink);
+}
+
+[data-theme='dark'] .theme-doc-markdown h1::after {
+  background: var(--rmt-sun);
+}
+
+[data-theme='dark'] .theme-doc-markdown h2 {
+  border-bottom-color: #2b3a52;
+  color: #bdd7ff;
+}
+
+[data-theme='dark'] .theme-doc-markdown h2::before {
+  background: var(--rmt-mint);
+}
+
+[data-theme='dark'] .theme-doc-markdown h3 {
+  color: #68d8b0;
+}
+
+[data-theme='dark'] .theme-doc-markdown p,
+[data-theme='dark'] .theme-doc-markdown li {
+  color: #ced9e8;
+}
+
+[data-theme='dark'] .theme-doc-markdown strong {
+  color: #f5f8fc;
+}
+
+[data-theme='dark'] .theme-doc-markdown a:hover {
+  color: #f7c65a;
+}
+
+[data-theme='dark'] .theme-doc-markdown table {
+  border-color: #34445d;
+  box-shadow: none;
+}
+
+[data-theme='dark'] .theme-doc-markdown thead tr {
+  background: #27364c;
+}
+
+[data-theme='dark'] .theme-doc-markdown th {
+  color: #fee3a1;
+}
+
+[data-theme='dark'] .theme-doc-markdown tr:nth-child(even) {
+  background: #152033;
+}
+
+[data-theme='dark'] .theme-doc-markdown tr:hover {
+  background: #1c2a40;
+}
+
+[data-theme='dark'] .theme-doc-markdown code {
+  background: #26324b;
+  border-color: #4b5f84;
+  color: #77e2b9;
+}
+
+[data-theme='dark'] .theme-doc-markdown pre {
+  background: #0d1523;
+  border-color: #354761;
+  box-shadow: none;
+}
+
+[data-theme='dark'] .theme-doc-markdown blockquote {
+  background: #123b33;
+  border-left-color: var(--rmt-mint);
+  color: #c2f0de;
+}
+
+[data-theme='dark'] .theme-doc-markdown img {
+  border: 0;
+}
+
+[data-theme='dark'] .theme-doc-sidebar-container {
+  background: #121c2c;
+  border-right-color: #2b3a51;
+}
+
+[data-theme='dark'] .theme-doc-sidebar-menu .menu__link:hover {
+  background: #382d21;
+  color: #f6cf80;
+}
+
+[data-theme='dark'] .theme-doc-sidebar-menu .menu__link--active {
+  background: #153e35;
+  box-shadow: inset 3px 0 0 var(--rmt-mint);
+  color: #6ee7bd;
+}
+
+html[data-theme='dark'].docs-doc-id-intro .theme-doc-markdown > p:first-of-type {
+  color: #b9c7da;
+}
+
+html[data-theme='dark'].docs-doc-id-intro .theme-doc-markdown > ul li {
+  background: #182235;
+  border-color: #2e3e56;
+  box-shadow: none;
+}
+
+[data-theme='dark'] .theme-admonition.theme-admonition-tip {
+  --ifm-alert-background-color: #123b33;
+  --ifm-alert-border-color: #28795f;
+  --ifm-alert-foreground-color: #6ee7bd;
+  background: #123b33;
+  border-color: #28795f;
+  box-shadow: none;
+  color: #c2f0de;
+}
+
+[data-theme='dark'] .theme-admonition.theme-admonition-tip [class*='admonitionHeading'] {
+  color: #6ee7bd;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  border-left-color: #7db2ff;
+  color: #9ac4ff;
+}
+
+[data-theme='dark'] .table-of-contents__link:hover {
+  color: #f6cf80;
+}
+
+@media (max-width: 996px) {
+  .theme-doc-markdown h1 {
+    font-size: 2rem;
+  }
 }
 
 /* 离线版导航栏上的版本号标记 */
