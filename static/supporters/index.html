@@ -19,6 +19,10 @@ header{display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;gap:14px;align-items:center}.logo{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,#57ffe1,#70ff94 52%,#ff65c8);color:#14200a;box-shadow:0 0 35px #49ffd655}.logo img{display:block;width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 0 6px #8affb8aa)}
 h1{font-size:18px;margin:0;letter-spacing:2px}.sub{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:3px}
 .stats{font-size:12px;color:#a9bdd6;background:#ffffff08;border:1px solid #ffffff14;padding:10px 14px;border-radius:999px;backdrop-filter:blur(12px)}
+.header-status{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.audio-unmute{display:none;width:44px;height:40px;border:1px solid #62ffe178;border-radius:999px;background:#071710e8;color:#dffff6;padding:0;font:20px/1 "Segoe UI Emoji","Segoe UI Symbol",sans-serif;box-shadow:0 8px 22px #0006;cursor:pointer;touch-action:manipulation}
+.audio-unmute.visible{display:block}
+.audio-unmute.playing{cursor:default;border-color:#62ffe13d;color:#9fffea}
 .stage{position:relative;display:grid;place-items:center;min-height:0}
 .orbit{position:absolute;width:min(58vw,58vh);aspect-ratio:1;border-radius:50%;border:1px solid #55ffe51d;box-shadow:inset 0 0 90px #4fffd009,0 0 90px #ff5ac80c}
 .orbit:before,.orbit:after{content:"";position:absolute;inset:8%;border:1px solid #ff67cb18;border-radius:50%;transform:rotateX(68deg)}
@@ -66,26 +70,32 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
 
 /* ===== Mobile optimization ===== */
 @media(max-width:850px){
- html,body{overflow:hidden;height:100%;height:100dvh}
- .wrap{height:100vh;height:100dvh;padding:12px 14px;grid-template-rows:auto 1fr}
+ html,body{overflow:hidden;height:100%;height:100dvh;-webkit-text-size-adjust:100%}
+ .wrap{height:100vh;height:100dvh;padding:max(12px,env(safe-area-inset-top)) 14px max(12px,env(safe-area-inset-bottom));grid-template-rows:auto 1fr}
  header{align-items:flex-start}
  .brand{gap:9px}.logo{width:36px;height:36px;border-radius:11px;font-size:13px}.logo img{width:24px;height:24px}
  h1{font-size:14px;letter-spacing:1px}.sub{font-size:8px;letter-spacing:1.4px;margin-top:2px}
- .stats{display:none}
+ header{gap:8px}.brand{min-width:0}.brand>div:last-child{min-width:0}
+ h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .header-status{flex:none;gap:5px}.stats{display:block;white-space:nowrap;padding:7px 9px;font-size:10px}
+ .audio-unmute{width:40px;height:36px;font-size:18px}
  .stage{min-height:0;overflow:visible}
  .globe{width:min(98vw,58dvh);height:min(98vw,58dvh);position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);perspective:700px}
  .orbit{width:min(102vw,60dvh);left:50%;top:42%;transform:translate(-50%,-50%)}
  .stage:before,.stage:after{left:50%;top:42%;width:min(104vw,62dvh)}
- .person{font-size:10px;text-shadow:0 0 8px #58ffe680}
+ .person{font-size:10px;text-shadow:0 0 5px #58ffe680}
  .person.active{font-size:13px}
  .supporter-bubble{max-width:70vw;padding:7px 9px;font-size:10px}
- .card{position:fixed;left:12px;right:12px;bottom:12px;width:auto;max-height:35dvh;padding:46px 14px 13px;border-radius:16px;overflow:visible}
- .card-toggle{right:10px;top:9px;height:28px;min-width:62px;font-size:11px}
- .card.collapsed{left:auto;right:12px;width:auto;padding:9px}
+ .card{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));width:auto;max-height:35dvh;padding:12px 14px 13px;border-radius:16px;overflow:visible;backdrop-filter:blur(8px)}
+ /* 手机上把收起按钮放回正常文档流，避免小屏时遮住搜索框。 */
+ .card-toggle{position:relative;right:auto;top:auto;display:block;margin-left:auto;min-width:82px;height:44px;font-size:12px}
+ .card-content{margin-top:10px}
+ .card.collapsed{left:auto;right:12px;width:auto;padding:8px}
+ .card.collapsed .card-toggle{margin:0;min-width:82px}
  .card .tag{font-size:8px;letter-spacing:2px}
  .card h2{font-size:20px;margin:7px 0 2px}
  .time{font-size:10px}.note{margin-top:9px;min-height:0;max-height:70px;overflow:auto;font-size:12px;line-height:1.5;padding:9px 10px;border-radius:10px}
- .searchbox{margin-bottom:10px;gap:6px}.searchbox input{padding:9px 10px;font-size:11px}.searchbox button{padding:0 11px}
+ .searchbox{margin-bottom:10px;gap:6px}.searchbox input{min-height:44px;padding:9px 10px;font-size:16px}.searchbox button{min-height:44px;padding:0 14px}
  .searchResults{top:auto;bottom:43px;max-height:31dvh}.result{padding:8px 10px;font-size:10px}.result b{font-size:11px}
  footer{display:none}
 }
@@ -93,21 +103,27 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
  .globe{width:min(106vw,55dvh);height:min(106vw,55dvh);top:40%}
  .orbit{width:min(110vw,57dvh);top:40%}
  .stage:before,.stage:after{width:min(112vw,59dvh);top:40%}
- .card{left:9px;right:9px;bottom:max(9px,env(safe-area-inset-bottom));padding:11px 12px}
+ .card{left:9px;right:9px;bottom:max(9px,env(safe-area-inset-bottom));padding:10px 12px}
  .note{max-height:58px}
 }
 @media(max-height:650px) and (max-width:850px){
  .sub{display:none}.logo{width:32px;height:32px}.logo img{width:21px;height:21px}.globe{top:37%;width:min(92vw,55dvh);height:min(92vw,55dvh)}
  .orbit,.stage:before,.stage:after{top:37%}.card{max-height:38dvh}.note{max-height:45px}
 }
+@media(max-width:850px){
+ /* 全屏滤镜会让手机 GPU 持续合成，移动端改为更轻的纯画布效果。 */
+ #stars{filter:none}.core{box-shadow:0 0 18px #6cf,0 0 55px #7a5fff77,0 0 95px #ff64c922;animation:pulse-mobile 4s ease-in-out infinite}
+}
+@keyframes pulse-mobile{50%{transform:translate(-50%,-50%) scale(1.04)}}
+@media(prefers-reduced-motion:reduce){.core{animation:none}}
 
 </style>
 </head>
 <body>
 <canvas id="stars"></canvas><canvas id="meteors"></canvas>
-<audio id="backgroundMusic" src="./audio/background.mp3" preload="auto" autoplay loop playsinline></audio>
+<audio id="backgroundMusic" src="./audio/background.mp3" preload="auto" loop playsinline></audio>
 <div class="wrap">
-<header><div class="brand"><div class="logo"><img src="../img/rmt-logo.png" alt="RMT 兔子图标"></div><div><h1>若梦兔 RMT · 支持者星空</h1><div class="sub">EVERY SUPPORT BECOMES A STAR</div></div></div><div class="stats" id="stats"></div></header>
+<header><div class="brand"><div class="logo"><img src="../img/rmt-logo.png" alt="RMT 兔子图标"></div><div><h1>若梦兔 RMT · 支持者星空</h1><div class="sub">EVERY SUPPORT BECOMES A STAR</div></div></div><div class="header-status"><div class="stats" id="stats"></div><button class="audio-unmute" id="audioUnmute" type="button" aria-label="取消静音并播放音乐" title="取消静音并播放音乐">🔇</button></div></header>
 <main class="stage">
 <div class="orbit"></div>
 <div class="globe" id="globe"><div class="sphere" id="sphere"></div></div>
@@ -136,6 +152,7 @@ const supporters = Array.isArray(window.RMT_SUPPORTERS) ? window.RMT_SUPPORTERS 
 const sphere=document.getElementById('sphere'), globe=document.getElementById('globe');
 const nameEl=document.getElementById('name'),timeEl=document.getElementById('time'),noteEl=document.getElementById('note');
 const detailCard=document.getElementById('detailCard'),cardToggle=document.getElementById('cardToggle');
+const audioUnmute=document.getElementById('audioUnmute');
 document.getElementById('stats').textContent=`${supporters.length} 份支持 · 2025 — 2026`;
 
 cardToggle.onclick=()=>{
@@ -158,58 +175,82 @@ function supporterColor(s){
   return supporterPalette[stableHash(`${s.year} ${s.time}`)%supporterPalette.length];
 }
 
-// 使用用户提供的固定背景音乐；流星音效继续由 Web Audio 单独生成。
-// 浏览器禁止无交互自动播放时，会在用户第一次点击、触摸或按键时自动解锁。
+// 背景音乐保持原生 <audio> 输出，不依赖流星音效的 Web Audio 上下文。
+// 这样移动端在首次交互后能稳定恢复背景音乐播放。
 const backgroundMusic=document.getElementById('backgroundMusic');
 const AudioContextClass=window.AudioContext||window.webkitAudioContext;
-let audioContext=null,audioMaster=null,backgroundSource=null,backgroundGain=null;
+backgroundMusic.volume=.12;
+let audioContext=null,audioMaster=null;
 function ensureAudio(){
-  if(!AudioContextClass){backgroundMusic.volume=.12;return null}
+  if(!AudioContextClass)return null;
   if(!audioContext){
     audioContext=new AudioContextClass();
-    try{
-      backgroundSource=audioContext.createMediaElementSource(backgroundMusic);
-      backgroundGain=audioContext.createGain();
-      backgroundGain.gain.value=.12;
-      backgroundSource.connect(backgroundGain);backgroundGain.connect(audioContext.destination);
-    }catch{
-      // 极旧浏览器不支持 MediaElementSource 时，仍使用媒体元素自身的低音量。
-      backgroundMusic.volume=.12;
-    }
     audioMaster=audioContext.createGain();
-    audioMaster.gain.value=.28;
+    // 流星音效比背景音乐更清晰，避免在手机扬声器上几乎听不见。
+    audioMaster.gain.value=.5;
     audioMaster.connect(audioContext.destination);
   }
   return audioContext;
 }
-async function activateAudio(){
+function showMutedAudioControl(){
+  audioUnmute.classList.add('visible');
+  audioUnmute.classList.remove('playing');
+  audioUnmute.disabled=false;
+  audioUnmute.textContent='🔇';
+  audioUnmute.setAttribute('aria-label','取消静音并播放音乐');
+  audioUnmute.title='取消静音并播放音乐';
+}
+function showPlayingAudioControl(){
+  audioUnmute.classList.add('visible','playing');
+  audioUnmute.disabled=true;
+  audioUnmute.textContent='🔊';
+  audioUnmute.setAttribute('aria-label','背景音乐正在播放');
+  audioUnmute.title='背景音乐正在播放';
+}
+async function activateAudio(showPlayingControl=false){
+  // 先在用户手势的同步阶段请求播放，避免 iOS/Safari 在 await 之后丢失授权。
+  const musicPromise=backgroundMusic.paused?backgroundMusic.play():Promise.resolve();
   const ctx=ensureAudio();
-  if(ctx&&ctx.state==='suspended')await ctx.resume();
-  if(backgroundMusic.paused)await backgroundMusic.play();
+  const contextPromise=ctx&&ctx.state==='suspended'?ctx.resume():Promise.resolve();
+  await Promise.all([musicPromise,contextPromise]);
+  if(showPlayingControl)showPlayingAudioControl();
+  else audioUnmute.classList.remove('visible');
 }
 function playMeteorSound(s){
   const ctx=audioContext;
   if(!ctx||ctx.state!=='running')return;
-  const start=ctx.currentTime+.02;
+  // 流星出现后半秒再响起，音效总时长比原先增加 1 秒。
+  const start=ctx.currentTime+.5;
+  const duration=2.55;
   const seed=stableHash(`${s.year} ${s.time}`);
   const gain=ctx.createGain();
   const sweep=ctx.createOscillator();
   const sparkle=ctx.createOscillator();
   sweep.type='sine';sparkle.type='triangle';
   sweep.frequency.setValueAtTime(980+(seed%180),start);
-  sweep.frequency.exponentialRampToValueAtTime(210+(seed%70),start+1.45);
+  sweep.frequency.exponentialRampToValueAtTime(210+(seed%70),start+duration-0.1);
   sparkle.frequency.setValueAtTime(1320+(seed%240),start);
-  sparkle.frequency.exponentialRampToValueAtTime(620,start+1.05);
+  sparkle.frequency.exponentialRampToValueAtTime(620,start+duration-0.45);
   gain.gain.setValueAtTime(.0001,start);
   gain.gain.exponentialRampToValueAtTime(.16,start+.06);
-  gain.gain.exponentialRampToValueAtTime(.0001,start+1.5);
+  gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
   sweep.connect(gain);sparkle.connect(gain);gain.connect(audioMaster);
-  sweep.start(start);sparkle.start(start);sweep.stop(start+1.55);sparkle.stop(start+1.55);
+  sweep.start(start);sparkle.start(start);sweep.stop(start+duration+.05);sparkle.stop(start+duration+.05);
 }
-addEventListener('load',()=>activateAudio().catch(()=>{}));
+function requestBackgroundMusic(showPlayingControl=false){
+  activateAudio(showPlayingControl).catch(showMutedAudioControl);
+}
+// 先让页面首帧完成绘制，再立刻请求播放；不等待整页资源加载。
+requestAnimationFrame(()=>requestAnimationFrame(requestBackgroundMusic));
+// 音频缓冲完成时再试一次，避免首次请求早于可播放状态。
+backgroundMusic.addEventListener('canplay',requestBackgroundMusic,{once:true});
 for(const eventName of ['pointerdown','touchstart','keydown']){
-  addEventListener(eventName,()=>activateAudio().catch(()=>{}),{once:true,passive:true});
+  addEventListener(eventName,requestBackgroundMusic,{once:true,passive:true,capture:true});
 }
+audioUnmute.addEventListener('click',()=>requestBackgroundMusic(true));
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden)requestBackgroundMusic();
+});
 
 // 自动朝向只由现实时间决定。两个互质周期覆盖完整经纬方向，
 // 因而南北极与所有普通节点都有机会转到正前方；未人工操作时各客户端画面一致。
@@ -223,6 +264,8 @@ function timeOrientation(epochTime){
 }
 const initialOrientation=timeOrientation(Date.now());
 let rx=initialOrientation.rx,ry=initialOrientation.ry,scale=1.08,drag=false,lx=0,ly=0,auto=true,autoTimer=0;
+// 1 表示球体向右转，-1 表示向左转；流星据此选择左右对角线。
+let sphereTurnDirection=1,lastAutoRy=initialOrientation.ry;
 let autoBlendStarted=0,autoBlendFrom={rx,ry};
 function shortestAngleDelta(from,to){return ((to-from+540)%360)-180}
 function pauseAuto(){
@@ -231,6 +274,8 @@ function pauseAuto(){
 }
 function startAutoRotation(){
   if(autoTimer){clearTimeout(autoTimer);autoTimer=0}
+  // 手动定位结束后，信息卡重新跟随球体正中央的支持者。
+  selectedSupporterIndex=null;
   autoBlendFrom={rx,ry};
   autoBlendStarted=performance.now();
   auto=true;
@@ -253,14 +298,24 @@ supporters.forEach((s,i)=>{
   el.addEventListener('click',event=>{
     event.stopPropagation();
     if(detailCard.classList.contains('collapsed'))return;
-    show(i);pauseAutoFor(10000);
+    selectSupporter(i);pauseAutoFor(10000);
   });
   sphere.appendChild(el); nodes.push(el);
 });
+let selectedSupporterIndex=null,centerSupporterIndex=-1;
 function show(i){
   nodes.forEach(n=>n.classList.remove('active')); nodes[i].classList.add('active');
   const s=supporters[i]; nameEl.textContent=s.name; timeEl.textContent=`${s.year} · ${s.time}`;
   noteEl.textContent=s.note||'这位支持者留下了一份安静的鼓励 ✦'; noteEl.classList.toggle('empty',!s.note);
+}
+function selectSupporter(i){
+  selectedSupporterIndex=i;
+  show(i);
+}
+function refreshCenterSupporter(i){
+  if(selectedSupporterIndex!==null||i===centerSupporterIndex)return;
+  centerSupporterIndex=i;
+  if(i>=0)show(i);
 }
 let bubbleClockSecond='',bubbleShown=new Set();
 function supportMinuteSecond(value){
@@ -298,9 +353,23 @@ function checkTimedNoteBubbles(){
     }
   });
 }
+function showRandomFrontBubble(){
+  const candidates=supporters.map((supporter,i)=>({supporter,i})).filter(({supporter,i})=>
+    String(supporter.note||'').trim()&&Number(nodes[i].dataset.frontZ)>.55
+  );
+  if(candidates.length){
+    const picked=candidates[Math.floor(Math.random()*candidates.length)];
+    showSupporterBubble(picked.i);
+  }
+}
+// 保留按打赏时分秒触发的冒泡；以下五组定时器补足留言较少时的展示频率。
+[5000,8000,10000,12000,15000].forEach(interval=>setInterval(()=>{
+  if(!document.hidden)showRandomFrontBubble();
+},interval));
 function render(){
   const w=globe.clientWidth, R=w*.54*scale, ax=rx*Math.PI/180, ay=ry*Math.PI/180;
-  nodes.forEach(el=>{
+  let nearestCenter=-1,nearestCenterDistance=Infinity;
+  nodes.forEach((el,i)=>{
     let x=+el.dataset.x,y=+el.dataset.y,z=+el.dataset.z;
     let x1=x*Math.cos(ay)+z*Math.sin(ay), z1=-x*Math.sin(ay)+z*Math.cos(ay);
     let y1=y*Math.cos(ax)-z1*Math.sin(ax), z2=y*Math.sin(ax)+z1*Math.cos(ax);
@@ -308,7 +377,13 @@ function render(){
     el.style.transform=`translate(-50%,-50%) translate(${x1*R}px,${y1*R}px) scale(${sc})`;
     el.style.opacity=.18+depth*.82; el.style.zIndex=Math.floor(depth*100);
     el.dataset.frontZ=String(z2);
+    // 只从前半球选择投影到球心最近的昵称，作为未定位时的信息卡内容。
+    if(z2>0){
+      const distance=x1*x1+y1*y1;
+      if(distance<nearestCenterDistance){nearestCenterDistance=distance;nearestCenter=i}
+    }
   });
+  refreshCenterSupporter(nearestCenter);
   checkTimedNoteBubbles();
 }
 const touches=new Map();
@@ -341,7 +416,9 @@ globe.onpointermove=e=>{
   if(!drag)return;
   const k=e.pointerType==='touch'?.24:.35;
   // 拖动方向与鼠标/手指保持一致，并限制纬向角度以避免上下颠倒。
-  ry+=(e.clientX-lx)*k;
+  const horizontalDelta=e.clientX-lx;
+  if(horizontalDelta)sphereTurnDirection=Math.sign(horizontalDelta);
+  ry+=horizontalDelta*k;
   rx=Math.max(-89.5,Math.min(89.5,rx-(e.clientY-ly)*(e.pointerType==='touch'?.18:.25)));
   lx=e.clientX;ly=e.clientY;render();
 };
@@ -384,9 +461,13 @@ globe.addEventListener('pointerup',e=>{
 });
 
 globe.onwheel=e=>{e.preventDefault();pauseAuto();scale=Math.max(.72,Math.min(1.65,scale-e.deltaY*.0007));render();startAutoRotation()};
+let lastGlobeRender=0;
 function tick(frameTime){
   if(auto){
     const target=timeOrientation(Date.now());
+    const autoDelta=shortestAngleDelta(lastAutoRy,target.ry);
+    if(Math.abs(autoDelta)>.001)sphereTurnDirection=Math.sign(autoDelta);
+    lastAutoRy=target.ry;
     const progress=autoBlendStarted?Math.min(1,(frameTime-autoBlendStarted)/AUTO_BLEND_DURATION):1;
     if(progress<1){
       const eased=1-Math.pow(1-progress,3);
@@ -396,7 +477,12 @@ function tick(frameTime){
       rx=target.rx;ry=target.ry;autoBlendStarted=0;
     }
   }
-  render();requestAnimationFrame(tick);
+  // 小屏限制为 30fps；拖动和缩放仍会立即调用 render()，不牺牲操作反馈。
+  const frameInterval=matchMedia('(max-width:850px)').matches?1000/24:0;
+  if(frameTime-lastGlobeRender>=frameInterval){
+    render();lastGlobeRender=frameTime;
+  }
+  requestAnimationFrame(tick);
 }
 requestAnimationFrame(tick);
 
@@ -425,7 +511,7 @@ function runSearch(){
     const i=+el.dataset.i; const n=nodes[i];
     const x=+n.dataset.x,z=+n.dataset.z;
     ry=Math.atan2(-x,z)*180/Math.PI;
-    rx=0; show(i); render();
+    rx=0; selectSupporter(i); render();
     searchResults.style.display='none';
     pauseAutoFor(10000);
   });
@@ -440,9 +526,27 @@ document.addEventListener('click',event=>{
 
 // starfield
 const c=document.getElementById('stars'),ctx=c.getContext('2d');let stars=[];
-function resize(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);stars=Array.from({length:180},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.2,a:Math.random()}))}
+function canvasPixelRatio(){return Math.min(devicePixelRatio||1,isMobile()?1.5:2)}
+function isMobile(){return matchMedia('(max-width:850px)').matches}
+function resize(){
+  const ratio=canvasPixelRatio();
+  c.width=innerWidth*ratio;c.height=innerHeight*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);
+  stars=Array.from({length:isMobile()?55:180},()=>({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.2,
+    a:Math.random(),color:Math.random()>.72?'#ff67ca':'#58f6ff'
+  }));
+}
 addEventListener('resize',resize);resize();
-(function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);for(const s of stars){s.a+=.008;ctx.globalAlpha=.2+Math.abs(Math.sin(s.a))*.65;ctx.fillStyle=Math.random()>.72?'#ff67ca':'#58f6ff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill()}requestAnimationFrame(draw)})();
+let lastStarFrame=0;
+(function draw(frameTime){
+  const interval=isMobile()?1000/20:0;
+  if(frameTime-lastStarFrame>=interval){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    for(const s of stars){s.a+=.008;ctx.globalAlpha=.2+Math.abs(Math.sin(s.a))*.65;ctx.fillStyle=s.color;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill()}
+    lastStarFrame=frameTime;
+  }
+  requestAnimationFrame(draw)
+})(0);
 
 // supporter meteor rain
 // 只比较打赏记录末尾的“时:分:秒”。例如记录为 2026 3/15 20:57:09，
@@ -452,9 +556,10 @@ let meteors=[];
 let lastMeteorSecond='';
 
 function resizeMeteor(){
-  mc.width=innerWidth*devicePixelRatio;
-  mc.height=innerHeight*devicePixelRatio;
-  mx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  const ratio=canvasPixelRatio();
+  mc.width=innerWidth*ratio;
+  mc.height=innerHeight*ratio;
+  mx.setTransform(ratio,0,0,ratio,0,0);
 }
 addEventListener('resize',resizeMeteor);
 resizeMeteor();
@@ -471,14 +576,19 @@ function normalizeSupportTime(t){
   return `${pad2(+m[1])}:${pad2(+m[2])}:${pad2(+m[3])}`;
 }
 function spawnSupporterMeteor(s){
-  // 多人在同一秒打赏时，会从略微不同的位置依次划过。
+  // 流星沿球体的横向转动方向穿过屏幕：左上→右下或右上→左下。
+  const entersFromLeft=sphereTurnDirection>0;
+  const startRange=entersFromLeft?[.05,.30]:[.70,.95];
+  const endRange=entersFromLeft?[.70,.95]:[.05,.30];
+  const randomInRange=range=>innerWidth*(range[0]+Math.random()*(range[1]-range[0]));
   meteors.push({
-    x:innerWidth*(.68+Math.random()*.38),
-    y:-45-Math.random()*90,
-    vx:-0.72-Math.random()*.42,
-    vy:1.12+Math.random()*.55,
-    life:0,
-    max:420+Math.random()*130,
+    startX:randomInRange(startRange),
+    startY:-innerHeight*.08-Math.random()*innerHeight*.12,
+    endX:randomInRange(endRange),
+    endY:innerHeight*1.08+Math.random()*innerHeight*.12,
+    x:0,y:0,
+    progress:0,
+    duration:15000+Math.random()*5000,
     name:s.name,
     note:s.note||'',
     year:s.year,
@@ -495,21 +605,33 @@ function checkTimedMeteors(){
     if(normalizeSupportTime(s.time)===key) spawnSupporterMeteor(s);
   });
 }
-function meteorFrame(){
+let lastMeteorFrame=0;
+function meteorFrame(frameTime){
   checkTimedMeteors();
+  // 没有流星时只低频检查时间，避免透明画布在移动端持续以 60fps 清屏。
+  const frameInterval=meteors.length?(isMobile()?1000/30:0):250;
+  if(frameTime-lastMeteorFrame<frameInterval){
+    requestAnimationFrame(meteorFrame);
+    return;
+  }
+  const delta=Math.min(80,frameTime-lastMeteorFrame||16.67);
+  lastMeteorFrame=frameTime;
   mx.clearRect(0,0,innerWidth,innerHeight);
 
   meteors.forEach(m=>{
-    m.x+=m.vx;
-    m.y+=m.vy;
-    m.life++;
+    m.progress=Math.min(1,m.progress+delta/m.duration);
+    // ease-out 让流星开始时更有速度感，末端自然收束。
+    const progress=1-Math.pow(1-m.progress,1.15);
+    m.x=m.startX+(m.endX-m.startX)*progress;
+    m.y=m.startY+(m.endY-m.startY)*progress;
 
-    const fadeIn=Math.min(1,m.life/30);
-    const fadeOut=Math.max(0,1-m.life/m.max);
+    const fadeIn=Math.min(1,m.progress/.06);
+    const fadeOut=Math.max(0,1-(m.progress-.78)/.22);
     const a=fadeIn*fadeOut;
 
-    const mag=Math.hypot(m.vx,m.vy),ux=m.vx/mag,uy=m.vy/mag;
-    const len=150+mag*38;
+    const dx=m.endX-m.startX,dy=m.endY-m.startY;
+    const mag=Math.hypot(dx,dy),ux=dx/mag,uy=dy/mag;
+    const len=Math.min(240,110+mag*.12);
     const g=mx.createLinearGradient(m.x,m.y,m.x-ux*len,m.y-uy*len);
     g.addColorStop(0,m.hue+'f2');
     g.addColorStop(.16,m.hue+'82');
@@ -538,10 +660,10 @@ function meteorFrame(){
   });
 
   mx.globalAlpha=1;
-  meteors=meteors.filter(m=>m.life<m.max && m.y<innerHeight+120 && m.x>-220);
+  meteors=meteors.filter(m=>m.progress<1);
   requestAnimationFrame(meteorFrame);
 }
-meteorFrame();
+requestAnimationFrame(meteorFrame);
 
 </script>
 </body></html>
