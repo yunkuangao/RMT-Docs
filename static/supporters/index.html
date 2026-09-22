@@ -24,12 +24,17 @@ h1{font-size:18px;margin:0;letter-spacing:2px}.sub{font-size:11px;color:var(--mu
 .orbit:after{transform:rotateY(68deg)}
 .globe{position:relative;width:min(82vw,82vh);aspect-ratio:1;perspective:900px;cursor:grab;user-select:none;touch-action:none}
 .globe:active{cursor:grabbing}.sphere{position:absolute;inset:0;transform-style:preserve-3d}
-.person{position:absolute;left:50%;top:50%;transform-style:preserve-3d;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.4px;color:#dcecff;text-shadow:0 0 12px #58ffe680;transition:color .25s,text-shadow .25s,opacity .25s}
-.person.active{color:#fff;text-shadow:0 0 8px #fff,0 0 22px var(--cyan),0 0 42px var(--purple);font-size:16px;z-index:10}
+.person{--star-color:#5effd7;position:absolute;left:50%;top:50%;transform-style:preserve-3d;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--star-color);text-shadow:0 0 12px color-mix(in srgb,var(--star-color) 65%,transparent);transition:color .25s,text-shadow .25s,opacity .25s}
+.person.active{color:#fff;text-shadow:0 0 8px #fff,0 0 22px var(--star-color),0 0 42px var(--star-color);font-size:16px;z-index:10}
 .core{position:absolute;left:50%;top:50%;width:145px;height:145px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#dfffff,#64ecff 15%,#785dff 42%,#1c155d 65%,#050713 73%);box-shadow:0 0 25px #6cf,0 0 80px #7a5fff99,0 0 150px #ff64c933;animation:pulse 3s ease-in-out infinite;pointer-events:none}
 .core:after{content:"RMT";position:absolute;inset:0;display:grid;place-items:center;font-size:28px;font-weight:1000;letter-spacing:4px;color:white;text-shadow:0 0 20px #fff}
 @keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.06);filter:hue-rotate(20deg)}}
-.card{position:fixed;right:28px;bottom:28px;top:auto;transform:none;width:min(370px,calc(100vw - 40px));z-index:8;padding:22px;border-radius:22px;background:linear-gradient(135deg,#10172dcc,#0b0d1ecc);border:1px solid #58ffe228;box-shadow:0 20px 70px #0008, inset 0 0 35px #58ffe208;backdrop-filter:blur(18px)}
+.card{position:fixed;right:28px;bottom:28px;top:auto;transform:none;width:min(370px,calc(100vw - 40px));z-index:8;padding:54px 22px 22px;border-radius:22px;background:linear-gradient(135deg,#10172dcc,#0b0d1ecc);border:1px solid #58ffe228;box-shadow:0 20px 70px #0008, inset 0 0 35px #58ffe208;backdrop-filter:blur(18px);transition:width .2s,padding .2s}
+.card-toggle{position:absolute;right:14px;top:13px;min-width:66px;height:30px;border:1px solid #62ffe13b;border-radius:10px;background:#071710dc;color:#9fffea;font:700 12px/1 "Microsoft YaHei",sans-serif;cursor:pointer;touch-action:manipulation}
+.card-toggle:hover,.card-toggle:focus-visible{border-color:#62ffe19c;background:#123128;outline:none}
+.card.collapsed{width:auto;padding:12px}
+.card.collapsed .card-content{display:none}
+.card.collapsed .card-toggle{position:static}
 .card .tag{font-size:10px;letter-spacing:3px;color:var(--cyan)}.card h2{font-size:28px;margin:10px 0 4px}.time{font-size:12px;color:var(--muted)}
 .note{margin-top:18px;min-height:76px;font-size:16px;line-height:1.7;color:#dfeaff;padding:15px;border-radius:14px;background:#ffffff07;border-left:2px solid var(--cyan)}
 .note.empty{color:#64758e;font-style:italic}
@@ -39,7 +44,7 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
 
 .stage:before,.stage:after{content:"";position:absolute;left:50%;top:50%;width:min(76vw,76vh);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) rotate(-12deg) scaleY(.27);border:1px solid #54ffe520;box-shadow:0 0 35px #4fffe00a;pointer-events:none}
 .stage:after{width:min(68vw,68vh);transform:translate(-50%,-50%) rotate(37deg) scaleY(.18);border-color:#ff64ca20}
-.person:after{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#55ffe0;left:-8px;top:50%;box-shadow:0 0 9px #4dffdc}
+.person:after{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:var(--star-color);left:-9px;top:50%;box-shadow:0 0 10px var(--star-color)}
 
 
 .searchbox{position:relative;display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:17px}
@@ -69,7 +74,9 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
  .stage:before,.stage:after{left:50%;top:42%;width:min(118vw,72dvh)}
  .person{font-size:10px;text-shadow:0 0 8px #58ffe680}
  .person.active{font-size:13px}
- .card{position:fixed;left:12px;right:12px;bottom:12px;width:auto;max-height:35dvh;padding:13px 14px;border-radius:16px;overflow:visible}
+ .card{position:fixed;left:12px;right:12px;bottom:12px;width:auto;max-height:35dvh;padding:46px 14px 13px;border-radius:16px;overflow:visible}
+ .card-toggle{right:10px;top:9px;height:28px;min-width:62px;font-size:11px}
+ .card.collapsed{left:auto;right:12px;width:auto;padding:9px}
  .card .tag{font-size:8px;letter-spacing:2px}
  .card h2{font-size:20px;margin:7px 0 2px}
  .time{font-size:10px}.note{margin-top:9px;min-height:0;max-height:70px;overflow:auto;font-size:12px;line-height:1.5;padding:9px 10px;border-radius:10px}
@@ -98,13 +105,17 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
 <main class="stage">
 <div class="orbit"></div>
 <div class="globe" id="globe"><div class="sphere" id="sphere"></div></div>
-<aside class="card">
+<aside class="card" id="detailCard">
+<button class="card-toggle" id="cardToggle" type="button" aria-expanded="true" aria-controls="cardContent">收起 ▲</button>
+<div class="card-content" id="cardContent">
 <div class="searchbox">
   <input id="searchInput" placeholder="搜索时间 / 名称 / 留言…" autocomplete="off">
   <button id="searchBtn">定位</button>
   <div id="searchResults" class="searchResults"></div>
 </div>
-<div class="tag">SUPPORTER SIGNAL</div><h2 id="name">感谢每一位支持者</h2><div class="time" id="time">RMT · SUPPORTER CONSTELLATION</div><div class="note" id="note">每一份支持，都让若梦兔走得更远。</div></aside>
+<div class="tag">SUPPORTER SIGNAL</div><h2 id="name">感谢每一位支持者</h2><div class="time" id="time">RMT · SUPPORTER CONSTELLATION</div><div class="note" id="note">每一份支持，都让若梦兔走得更远。</div>
+</div>
+</aside>
 </main>
 <footer>RMT · 若梦兔 · 开源因热爱而开始，也因大家的支持走得更远</footer>
 </div>
@@ -118,16 +129,49 @@ const supporters = Array.isArray(window.RMT_SUPPORTERS) ? window.RMT_SUPPORTERS 
 
 const sphere=document.getElementById('sphere'), globe=document.getElementById('globe');
 const nameEl=document.getElementById('name'),timeEl=document.getElementById('time'),noteEl=document.getElementById('note');
+const detailCard=document.getElementById('detailCard'),cardToggle=document.getElementById('cardToggle');
 document.getElementById('stats').textContent=`${supporters.length} 份支持 · 2025 — 2026`;
 
-let rx=-8,ry=0,scale=1.08,drag=false,lx=0,ly=0,auto=true;
+cardToggle.onclick=()=>{
+  const collapsed=detailCard.classList.toggle('collapsed');
+  cardToggle.textContent=collapsed?'展开 ▼':'收起 ▲';
+  cardToggle.setAttribute('aria-expanded',String(!collapsed));
+};
+
+const supporterPalette=['#5effd7','#55d6ff','#7f9cff','#a987ff','#ff73bf','#ff9f68','#ffd166','#9bea72'];
+function stableHash(value){
+  let hash=2166136261;
+  for(const char of String(value)){
+    hash^=char.codePointAt(0);
+    hash=Math.imul(hash,16777619);
+  }
+  return hash>>>0;
+}
+function supporterColor(s){
+  // 只使用打赏时间作为种子，同一条记录每次打开、搜索和触发流星时颜色都一致。
+  return supporterPalette[stableHash(`${s.year} ${s.time}`)%supporterPalette.length];
+}
+
+let rx=-8,ry=0,scale=1.08,drag=false,lx=0,ly=0,auto=true,autoTimer=0;
+function pauseAuto(){
+  auto=false;
+  if(autoTimer){clearTimeout(autoTimer);autoTimer=0}
+}
+function resumeAutoAfter(delay){
+  pauseAuto();
+  autoTimer=setTimeout(()=>{
+    if(!drag&&touches.size===0)auto=true;
+    autoTimer=0;
+  },delay);
+}
 const nodes=[], N=supporters.length;
 supporters.forEach((s,i)=>{
   const el=document.createElement('div'); el.className='person'; el.textContent=s.name;
+  el.style.setProperty('--star-color',supporterColor(s));
   const y=1-(i/(Math.max(1,N-1)))*2, radius=Math.sqrt(1-y*y), theta=Math.PI*(3-Math.sqrt(5))*i;
   el.dataset.x=Math.cos(theta)*radius; el.dataset.y=y; el.dataset.z=Math.sin(theta)*radius;
-  el.onmouseenter=()=>{auto=false;show(i)}; el.onmouseleave=()=>auto=true;
-  el.onclick=()=>show(i); sphere.appendChild(el); nodes.push(el);
+  el.onclick=()=>{show(i);resumeAutoAfter(10000)};
+  sphere.appendChild(el); nodes.push(el);
 });
 function show(i){
   nodes.forEach(n=>n.classList.remove('active')); nodes[i].classList.add('active');
@@ -136,17 +180,14 @@ function show(i){
 }
 function render(){
   const w=globe.clientWidth, R=w*.54*scale, ax=rx*Math.PI/180, ay=ry*Math.PI/180;
-  let front=-1, frontZ=-9;
-  nodes.forEach((el,i)=>{
+  nodes.forEach(el=>{
     let x=+el.dataset.x,y=+el.dataset.y,z=+el.dataset.z;
     let x1=x*Math.cos(ay)+z*Math.sin(ay), z1=-x*Math.sin(ay)+z*Math.cos(ay);
     let y1=y*Math.cos(ax)-z1*Math.sin(ax), z2=y*Math.sin(ax)+z1*Math.cos(ax);
     const depth=(z2+1)/2, sc=.62+depth*.62;
     el.style.transform=`translate(-50%,-50%) translate(${x1*R}px,${y1*R}px) scale(${sc})`;
     el.style.opacity=.18+depth*.82; el.style.zIndex=Math.floor(depth*100);
-    if(z2>frontZ){frontZ=z2;front=i}
   });
-  if(auto && front>=0 && Math.floor(ry)%7===0) show(front);
 }
 const touches=new Map();
 let pinchStartDist=0,pinchStartScale=1;
@@ -159,11 +200,11 @@ globe.onpointerdown=e=>{
       const a=[...touches.values()];
       pinchStartDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);
       pinchStartScale=scale;
-      drag=false;auto=false;
+      drag=false;pauseAuto();
       return;
     }
   }
-  drag=true;auto=false;lx=e.clientX;ly=e.clientY;
+  drag=true;pauseAuto();lx=e.clientX;ly=e.clientY;
 };
 globe.onpointermove=e=>{
   if(e.pointerType==='touch'&&touches.has(e.pointerId)){
@@ -188,7 +229,7 @@ function endPointer(e){
       const a=[...touches.values()][0];lx=a.x;ly=a.y;drag=true;
     }else drag=false;
   }else drag=false;
-  setTimeout(()=>{if(!drag&&touches.size===0)auto=true},1200);
+  resumeAutoAfter(1200);
 }
 globe.onpointerup=endPointer;
 globe.onpointercancel=endPointer;
@@ -218,7 +259,7 @@ globe.addEventListener('pointerup',e=>{
  tapStart=null;
 });
 
-globe.onwheel=e=>{e.preventDefault();scale=Math.max(.72,Math.min(1.65,scale-e.deltaY*.0007));render()};
+globe.onwheel=e=>{e.preventDefault();pauseAuto();scale=Math.max(.72,Math.min(1.65,scale-e.deltaY*.0007));render();resumeAutoAfter(1200)};
 function tick(){if(auto)ry+=.055;render();requestAnimationFrame(tick)} tick();
 
 
@@ -246,9 +287,9 @@ function runSearch(){
     const i=+el.dataset.i; const n=nodes[i];
     const x=+n.dataset.x,z=+n.dataset.z;
     ry=Math.atan2(-x,z)*180/Math.PI;
-    rx=0; auto=false; show(i); render();
+    rx=0; show(i); render();
     searchResults.style.display='none';
-    setTimeout(()=>auto=true,2600);
+    resumeAutoAfter(10000);
   });
 }
 searchInput.addEventListener('input',runSearch);
@@ -262,10 +303,9 @@ function resize(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devic
 addEventListener('resize',resize);resize();
 (function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);for(const s of stars){s.a+=.008;ctx.globalAlpha=.2+Math.abs(Math.sin(s.a))*.65;ctx.fillStyle=Math.random()>.72?'#ff67ca':'#58f6ff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill()}requestAnimationFrame(draw)})();
 
-// supporter anniversary meteor rain
-// 只有当前“月/日 时:分:秒”与支持记录完全重合时才触发。
-// 年份不参与匹配：例如 2025 年 5/12 21:33:06 的支持者，
-// 在以后每年的 5/12 21:33:06 都会作为纪念流星再次划过。
+// supporter meteor rain
+// 只比较打赏记录末尾的“时:分:秒”。例如记录为 2026 3/15 20:57:09，
+// 那么现实时间每天到达 20:57:09 时，都会出现这位支持者对应的流星。
 const mc=document.getElementById('meteors'),mx=mc.getContext('2d');
 let meteors=[];
 let lastMeteorSecond='';
@@ -281,13 +321,13 @@ resizeMeteor();
 function pad2(n){return String(n).padStart(2,'0')}
 function currentTimeKey(){
   const d=new Date();
-  return `${d.getMonth()+1}/${d.getDate()} ${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
+  return `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
 }
 function normalizeSupportTime(t){
-  // 数据里既有 8:51:50，也有 08:51:50，这里统一成 H:mm:ss 形式进行比较。
-  const m=String(t).match(/^(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{1,2}):(\d{1,2})$/);
+  // 数据里既有 8:51:50，也有 08:51:50，只提取并统一末尾的时分秒。
+  const m=String(t).match(/(?:^|\s)(\d{1,2}):(\d{1,2}):(\d{1,2})$/);
   if(!m)return String(t);
-  return `${+m[1]}/${+m[2]} ${pad2(+m[3])}:${pad2(+m[4])}:${pad2(+m[5])}`;
+  return `${pad2(+m[1])}:${pad2(+m[2])}:${pad2(+m[3])}`;
 }
 function spawnSupporterMeteor(s){
   // 多人在同一秒打赏时，会从略微不同的位置依次划过。
@@ -302,7 +342,7 @@ function spawnSupporterMeteor(s){
     note:s.note||'',
     year:s.year,
     time:s.time,
-    hue:Math.random()>.42?'#5effd7':'#ff65c8'
+    hue:supporterColor(s)
   });
 }
 function checkTimedMeteors(){

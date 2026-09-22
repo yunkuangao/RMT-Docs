@@ -119,7 +119,7 @@ const config: Config = {
           // 独立静态页面，不参与使用文档的版本化。
           // pathname:// 强制使用普通页面跳转，避免 SPA 路由接管静态页面。
           href: 'pathname:///supporters/',
-          target: '_self',
+          target: '_blank',
           html: '支持者星空',
           position: 'left',
         },
