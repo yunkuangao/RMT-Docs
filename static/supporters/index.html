@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>若梦兔 RMT · 支持者星空</title>
+<link rel="icon" type="image/png" href="../img/rmt-logo.png">
 <style>
 :root{--bg:#071008;--cyan:#4ffcff;--purple:#7cff8b;--pink:#ff65c8;--text:#f7ffe9;--muted:#9caf86}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,"Microsoft YaHei",system-ui,sans-serif;overflow:hidden}
@@ -15,17 +16,20 @@ radial-gradient(circle at 85% 80%,rgba(255,72,190,.09),transparent 30%);pointer-
 #stars,#meteors{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}#stars{opacity:.72}#meteors{z-index:1}
 .wrap{position:relative;height:100vh;display:grid;grid-template-rows:auto 1fr auto;padding:26px 36px;z-index:2}
 header{display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;gap:14px;align-items:center}.logo{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,#57ffe1,#70ff94 52%,#ff65c8);color:#14200a;box-shadow:0 0 35px #49ffd655}
+.brand{display:flex;gap:14px;align-items:center}.logo{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,#57ffe1,#70ff94 52%,#ff65c8);color:#14200a;box-shadow:0 0 35px #49ffd655}.logo img{display:block;width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 0 6px #8affb8aa)}
 h1{font-size:18px;margin:0;letter-spacing:2px}.sub{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:3px}
 .stats{font-size:12px;color:#a9bdd6;background:#ffffff08;border:1px solid #ffffff14;padding:10px 14px;border-radius:999px;backdrop-filter:blur(12px)}
 .stage{position:relative;display:grid;place-items:center;min-height:0}
-.orbit{position:absolute;width:min(70vw,70vh);aspect-ratio:1;border-radius:50%;border:1px solid #55ffe51d;box-shadow:inset 0 0 90px #4fffd009,0 0 90px #ff5ac80c}
+.orbit{position:absolute;width:min(58vw,58vh);aspect-ratio:1;border-radius:50%;border:1px solid #55ffe51d;box-shadow:inset 0 0 90px #4fffd009,0 0 90px #ff5ac80c}
 .orbit:before,.orbit:after{content:"";position:absolute;inset:8%;border:1px solid #ff67cb18;border-radius:50%;transform:rotateX(68deg)}
 .orbit:after{transform:rotateY(68deg)}
-.globe{position:relative;width:min(82vw,82vh);aspect-ratio:1;perspective:900px;cursor:grab;user-select:none;touch-action:none}
+.globe{position:relative;width:min(68vw,68vh);aspect-ratio:1;perspective:900px;cursor:grab;user-select:none;touch-action:none}
 .globe:active{cursor:grabbing}.sphere{position:absolute;inset:0;transform-style:preserve-3d}
 .person{--star-color:#5effd7;position:absolute;left:50%;top:50%;transform-style:preserve-3d;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--star-color);text-shadow:0 0 12px color-mix(in srgb,var(--star-color) 65%,transparent);transition:color .25s,text-shadow .25s,opacity .25s}
 .person.active{color:#fff;text-shadow:0 0 8px #fff,0 0 22px var(--star-color),0 0 42px var(--star-color);font-size:16px;z-index:10}
+.supporter-bubble{position:absolute;left:50%;bottom:calc(100% + 12px);width:max-content;max-width:min(260px,62vw);padding:9px 12px;border:1px solid color-mix(in srgb,var(--star-color) 62%,white 8%);border-radius:12px;background:#07120ff2;color:#f4fff9;font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.2px;white-space:normal;text-align:left;box-shadow:0 8px 30px #000a,0 0 20px color-mix(in srgb,var(--star-color) 34%,transparent);pointer-events:none;opacity:0;transform:translate(-50%,7px) scale(.94);transition:opacity .18s,transform .18s;z-index:200}
+.supporter-bubble:after{content:"";position:absolute;left:50%;top:100%;width:8px;height:8px;background:#07120ff2;border-right:1px solid var(--star-color);border-bottom:1px solid var(--star-color);transform:translate(-50%,-4px) rotate(45deg)}
+.supporter-bubble.visible{opacity:1;transform:translate(-50%,0) scale(1)}
 .core{position:absolute;left:50%;top:50%;width:145px;height:145px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#dfffff,#64ecff 15%,#785dff 42%,#1c155d 65%,#050713 73%);box-shadow:0 0 25px #6cf,0 0 80px #7a5fff99,0 0 150px #ff64c933;animation:pulse 3s ease-in-out infinite;pointer-events:none}
 .core:after{content:"RMT";position:absolute;inset:0;display:grid;place-items:center;font-size:28px;font-weight:1000;letter-spacing:4px;color:white;text-shadow:0 0 20px #fff}
 @keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.06);filter:hue-rotate(20deg)}}
@@ -40,10 +44,10 @@ h1{font-size:18px;margin:0;letter-spacing:2px}.sub{font-size:11px;color:var(--mu
 .note.empty{color:#64758e;font-style:italic}
 footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-spacing:1px;padding-bottom:3px}
 .hint{position:absolute;left:3%;top:50%;transform:translateY(-50%);font-size:11px;color:#687c99;line-height:2}
-@media(max-width:850px){.wrap{padding:18px}.card{right:14px;bottom:14px;top:auto;transform:none;width:min(92vw,420px)}.globe{width:min(88vw,55vh)}.hint{display:none}.stats{display:none}}
+@media(max-width:850px){.wrap{padding:18px}.card{right:14px;bottom:14px;top:auto;transform:none;width:min(92vw,420px)}.globe{width:min(82vw,50vh)}.hint{display:none}.stats{display:none}}
 
-.stage:before,.stage:after{content:"";position:absolute;left:50%;top:50%;width:min(76vw,76vh);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) rotate(-12deg) scaleY(.27);border:1px solid #54ffe520;box-shadow:0 0 35px #4fffe00a;pointer-events:none}
-.stage:after{width:min(68vw,68vh);transform:translate(-50%,-50%) rotate(37deg) scaleY(.18);border-color:#ff64ca20}
+.stage:before,.stage:after{content:"";position:absolute;left:50%;top:50%;width:min(64vw,64vh);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) rotate(-12deg) scaleY(.27);border:1px solid #54ffe520;box-shadow:0 0 35px #4fffe00a;pointer-events:none}
+.stage:after{width:min(56vw,56vh);transform:translate(-50%,-50%) rotate(37deg) scaleY(.18);border-color:#ff64ca20}
 .person:after{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:var(--star-color);left:-9px;top:50%;box-shadow:0 0 10px var(--star-color)}
 
 
@@ -65,15 +69,16 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
  html,body{overflow:hidden;height:100%;height:100dvh}
  .wrap{height:100vh;height:100dvh;padding:12px 14px;grid-template-rows:auto 1fr}
  header{align-items:flex-start}
- .brand{gap:9px}.logo{width:36px;height:36px;border-radius:11px;font-size:13px}
+ .brand{gap:9px}.logo{width:36px;height:36px;border-radius:11px;font-size:13px}.logo img{width:24px;height:24px}
  h1{font-size:14px;letter-spacing:1px}.sub{font-size:8px;letter-spacing:1.4px;margin-top:2px}
  .stats{display:none}
  .stage{min-height:0;overflow:visible}
- .globe{width:min(112vw,68dvh);height:min(112vw,68dvh);position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);perspective:700px}
- .orbit{width:min(116vw,70dvh);left:50%;top:42%;transform:translate(-50%,-50%)}
- .stage:before,.stage:after{left:50%;top:42%;width:min(118vw,72dvh)}
+ .globe{width:min(98vw,58dvh);height:min(98vw,58dvh);position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);perspective:700px}
+ .orbit{width:min(102vw,60dvh);left:50%;top:42%;transform:translate(-50%,-50%)}
+ .stage:before,.stage:after{left:50%;top:42%;width:min(104vw,62dvh)}
  .person{font-size:10px;text-shadow:0 0 8px #58ffe680}
  .person.active{font-size:13px}
+ .supporter-bubble{max-width:70vw;padding:7px 9px;font-size:10px}
  .card{position:fixed;left:12px;right:12px;bottom:12px;width:auto;max-height:35dvh;padding:46px 14px 13px;border-radius:16px;overflow:visible}
  .card-toggle{right:10px;top:9px;height:28px;min-width:62px;font-size:11px}
  .card.collapsed{left:auto;right:12px;width:auto;padding:9px}
@@ -85,14 +90,14 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
  footer{display:none}
 }
 @media(max-width:430px){
- .globe{width:min(122vw,64dvh);height:min(122vw,64dvh);top:40%}
- .orbit{width:min(126vw,66dvh);top:40%}
- .stage:before,.stage:after{width:min(128vw,68dvh);top:40%}
+ .globe{width:min(106vw,55dvh);height:min(106vw,55dvh);top:40%}
+ .orbit{width:min(110vw,57dvh);top:40%}
+ .stage:before,.stage:after{width:min(112vw,59dvh);top:40%}
  .card{left:9px;right:9px;bottom:max(9px,env(safe-area-inset-bottom));padding:11px 12px}
  .note{max-height:58px}
 }
 @media(max-height:650px) and (max-width:850px){
- .sub{display:none}.logo{width:32px;height:32px}.globe{top:37%;width:min(100vw,61dvh);height:min(100vw,61dvh)}
+ .sub{display:none}.logo{width:32px;height:32px}.logo img{width:21px;height:21px}.globe{top:37%;width:min(92vw,55dvh);height:min(92vw,55dvh)}
  .orbit,.stage:before,.stage:after{top:37%}.card{max-height:38dvh}.note{max-height:45px}
 }
 
@@ -100,8 +105,9 @@ footer{display:flex;justify-content:center;color:#62738d;font-size:11px;letter-s
 </head>
 <body>
 <canvas id="stars"></canvas><canvas id="meteors"></canvas>
+<audio id="backgroundMusic" src="./audio/background.mp3" preload="auto" autoplay loop playsinline></audio>
 <div class="wrap">
-<header><div class="brand"><div class="logo">兔</div><div><h1>若梦兔 RMT · 支持者星空</h1><div class="sub">EVERY SUPPORT BECOMES A STAR</div></div></div><div class="stats" id="stats"></div></header>
+<header><div class="brand"><div class="logo"><img src="../img/rmt-logo.png" alt="RMT 兔子图标"></div><div><h1>若梦兔 RMT · 支持者星空</h1><div class="sub">EVERY SUPPORT BECOMES A STAR</div></div></div><div class="stats" id="stats"></div></header>
 <main class="stage">
 <div class="orbit"></div>
 <div class="globe" id="globe"><div class="sphere" id="sphere"></div></div>
@@ -152,15 +158,87 @@ function supporterColor(s){
   return supporterPalette[stableHash(`${s.year} ${s.time}`)%supporterPalette.length];
 }
 
-let rx=-8,ry=0,scale=1.08,drag=false,lx=0,ly=0,auto=true,autoTimer=0;
+// 使用用户提供的固定背景音乐；流星音效继续由 Web Audio 单独生成。
+// 浏览器禁止无交互自动播放时，会在用户第一次点击、触摸或按键时自动解锁。
+const backgroundMusic=document.getElementById('backgroundMusic');
+const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+let audioContext=null,audioMaster=null,backgroundSource=null,backgroundGain=null;
+function ensureAudio(){
+  if(!AudioContextClass){backgroundMusic.volume=.12;return null}
+  if(!audioContext){
+    audioContext=new AudioContextClass();
+    try{
+      backgroundSource=audioContext.createMediaElementSource(backgroundMusic);
+      backgroundGain=audioContext.createGain();
+      backgroundGain.gain.value=.12;
+      backgroundSource.connect(backgroundGain);backgroundGain.connect(audioContext.destination);
+    }catch{
+      // 极旧浏览器不支持 MediaElementSource 时，仍使用媒体元素自身的低音量。
+      backgroundMusic.volume=.12;
+    }
+    audioMaster=audioContext.createGain();
+    audioMaster.gain.value=.28;
+    audioMaster.connect(audioContext.destination);
+  }
+  return audioContext;
+}
+async function activateAudio(){
+  const ctx=ensureAudio();
+  if(ctx&&ctx.state==='suspended')await ctx.resume();
+  if(backgroundMusic.paused)await backgroundMusic.play();
+}
+function playMeteorSound(s){
+  const ctx=audioContext;
+  if(!ctx||ctx.state!=='running')return;
+  const start=ctx.currentTime+.02;
+  const seed=stableHash(`${s.year} ${s.time}`);
+  const gain=ctx.createGain();
+  const sweep=ctx.createOscillator();
+  const sparkle=ctx.createOscillator();
+  sweep.type='sine';sparkle.type='triangle';
+  sweep.frequency.setValueAtTime(980+(seed%180),start);
+  sweep.frequency.exponentialRampToValueAtTime(210+(seed%70),start+1.45);
+  sparkle.frequency.setValueAtTime(1320+(seed%240),start);
+  sparkle.frequency.exponentialRampToValueAtTime(620,start+1.05);
+  gain.gain.setValueAtTime(.0001,start);
+  gain.gain.exponentialRampToValueAtTime(.16,start+.06);
+  gain.gain.exponentialRampToValueAtTime(.0001,start+1.5);
+  sweep.connect(gain);sparkle.connect(gain);gain.connect(audioMaster);
+  sweep.start(start);sparkle.start(start);sweep.stop(start+1.55);sparkle.stop(start+1.55);
+}
+addEventListener('load',()=>activateAudio().catch(()=>{}));
+for(const eventName of ['pointerdown','touchstart','keydown']){
+  addEventListener(eventName,()=>activateAudio().catch(()=>{}),{once:true,passive:true});
+}
+
+// 自动朝向只由现实时间决定。两个互质周期覆盖完整经纬方向，
+// 因而南北极与所有普通节点都有机会转到正前方；未人工操作时各客户端画面一致。
+const AUTO_X_PERIOD=257000,AUTO_Y_PERIOD=173000,AUTO_BLEND_DURATION=850;
+function timeOrientation(epochTime){
+  return {
+    // 纬向在 -89.5° 到 89.5° 之间往返，覆盖两极但不会把球体上下翻面。
+    rx:89.5*Math.sin((epochTime%AUTO_X_PERIOD)/AUTO_X_PERIOD*Math.PI*2),
+    ry:(epochTime%AUTO_Y_PERIOD)/AUTO_Y_PERIOD*360
+  };
+}
+const initialOrientation=timeOrientation(Date.now());
+let rx=initialOrientation.rx,ry=initialOrientation.ry,scale=1.08,drag=false,lx=0,ly=0,auto=true,autoTimer=0;
+let autoBlendStarted=0,autoBlendFrom={rx,ry};
+function shortestAngleDelta(from,to){return ((to-from+540)%360)-180}
 function pauseAuto(){
   auto=false;
   if(autoTimer){clearTimeout(autoTimer);autoTimer=0}
 }
-function resumeAutoAfter(delay){
+function startAutoRotation(){
+  if(autoTimer){clearTimeout(autoTimer);autoTimer=0}
+  autoBlendFrom={rx,ry};
+  autoBlendStarted=performance.now();
+  auto=true;
+}
+function pauseAutoFor(delay){
   pauseAuto();
   autoTimer=setTimeout(()=>{
-    if(!drag&&touches.size===0)auto=true;
+    if(!drag&&touches.size===0)startAutoRotation();
     autoTimer=0;
   },delay);
 }
@@ -170,13 +248,55 @@ supporters.forEach((s,i)=>{
   el.style.setProperty('--star-color',supporterColor(s));
   const y=1-(i/(Math.max(1,N-1)))*2, radius=Math.sqrt(1-y*y), theta=Math.PI*(3-Math.sqrt(5))*i;
   el.dataset.x=Math.cos(theta)*radius; el.dataset.y=y; el.dataset.z=Math.sin(theta)*radius;
-  el.onclick=()=>{show(i);resumeAutoAfter(10000)};
+  // 球体会捕获拖动指针；昵称单独拦截按下事件，保证点击能稳定刷新详情。
+  el.addEventListener('pointerdown',event=>event.stopPropagation());
+  el.addEventListener('click',event=>{
+    event.stopPropagation();
+    if(detailCard.classList.contains('collapsed'))return;
+    show(i);pauseAutoFor(10000);
+  });
   sphere.appendChild(el); nodes.push(el);
 });
 function show(i){
   nodes.forEach(n=>n.classList.remove('active')); nodes[i].classList.add('active');
   const s=supporters[i]; nameEl.textContent=s.name; timeEl.textContent=`${s.year} · ${s.time}`;
   noteEl.textContent=s.note||'这位支持者留下了一份安静的鼓励 ✦'; noteEl.classList.toggle('empty',!s.note);
+}
+let bubbleClockSecond='',bubbleShown=new Set();
+function supportMinuteSecond(value){
+  const match=String(value).match(/(\d{1,2}):(\d{1,2}):(\d{1,2})$/);
+  return match?`${String(+match[2]).padStart(2,'0')}:${String(+match[3]).padStart(2,'0')}`:'';
+}
+function showSupporterBubble(i){
+  const supporter=supporters[i],node=nodes[i];
+  const previous=node.querySelector('.supporter-bubble');
+  if(previous)previous.remove();
+  const bubble=document.createElement('span');
+  bubble.className='supporter-bubble';
+  bubble.textContent=supporter.note;
+  node.appendChild(bubble);
+  requestAnimationFrame(()=>bubble.classList.add('visible'));
+  setTimeout(()=>{
+    bubble.classList.remove('visible');
+    setTimeout(()=>bubble.remove(),200);
+  },3000);
+}
+function checkTimedNoteBubbles(){
+  const now=new Date();
+  const clockSecond=`${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+  if(clockSecond!==bubbleClockSecond){
+    bubbleClockSecond=clockSecond;
+    bubbleShown=new Set();
+  }
+  const minuteSecond=`${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+  supporters.forEach((supporter,i)=>{
+    if(!String(supporter.note||'').trim()||supportMinuteSecond(supporter.time)!==minuteSecond||bubbleShown.has(i))return;
+    // z2 大于 0.55 代表昵称位于面向用户的球体前部。
+    if(Number(nodes[i].dataset.frontZ)>0.55){
+      bubbleShown.add(i);
+      showSupporterBubble(i);
+    }
+  });
 }
 function render(){
   const w=globe.clientWidth, R=w*.54*scale, ax=rx*Math.PI/180, ay=ry*Math.PI/180;
@@ -187,7 +307,9 @@ function render(){
     const depth=(z2+1)/2, sc=.62+depth*.62;
     el.style.transform=`translate(-50%,-50%) translate(${x1*R}px,${y1*R}px) scale(${sc})`;
     el.style.opacity=.18+depth*.82; el.style.zIndex=Math.floor(depth*100);
+    el.dataset.frontZ=String(z2);
   });
+  checkTimedNoteBubbles();
 }
 const touches=new Map();
 let pinchStartDist=0,pinchStartScale=1;
@@ -218,7 +340,9 @@ globe.onpointermove=e=>{
   }
   if(!drag)return;
   const k=e.pointerType==='touch'?.24:.35;
-  ry+=(e.clientX-lx)*k;rx-=(e.clientY-ly)*(e.pointerType==='touch'?.18:.25);
+  // 拖动方向与鼠标/手指保持一致，并限制纬向角度以避免上下颠倒。
+  ry+=(e.clientX-lx)*k;
+  rx=Math.max(-89.5,Math.min(89.5,rx-(e.clientY-ly)*(e.pointerType==='touch'?.18:.25)));
   lx=e.clientX;ly=e.clientY;render();
 };
 function endPointer(e){
@@ -229,7 +353,7 @@ function endPointer(e){
       const a=[...touches.values()][0];lx=a.x;ly=a.y;drag=true;
     }else drag=false;
   }else drag=false;
-  resumeAutoAfter(1200);
+  if(!drag&&touches.size===0)startAutoRotation();
 }
 globe.onpointerup=endPointer;
 globe.onpointercancel=endPointer;
@@ -259,8 +383,22 @@ globe.addEventListener('pointerup',e=>{
  tapStart=null;
 });
 
-globe.onwheel=e=>{e.preventDefault();pauseAuto();scale=Math.max(.72,Math.min(1.65,scale-e.deltaY*.0007));render();resumeAutoAfter(1200)};
-function tick(){if(auto)ry+=.055;render();requestAnimationFrame(tick)} tick();
+globe.onwheel=e=>{e.preventDefault();pauseAuto();scale=Math.max(.72,Math.min(1.65,scale-e.deltaY*.0007));render();startAutoRotation()};
+function tick(frameTime){
+  if(auto){
+    const target=timeOrientation(Date.now());
+    const progress=autoBlendStarted?Math.min(1,(frameTime-autoBlendStarted)/AUTO_BLEND_DURATION):1;
+    if(progress<1){
+      const eased=1-Math.pow(1-progress,3);
+      rx=autoBlendFrom.rx+shortestAngleDelta(autoBlendFrom.rx,target.rx)*eased;
+      ry=autoBlendFrom.ry+shortestAngleDelta(autoBlendFrom.ry,target.ry)*eased;
+    }else{
+      rx=target.rx;ry=target.ry;autoBlendStarted=0;
+    }
+  }
+  render();requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
 
 
 // search & locate
@@ -289,13 +427,16 @@ function runSearch(){
     ry=Math.atan2(-x,z)*180/Math.PI;
     rx=0; show(i); render();
     searchResults.style.display='none';
-    resumeAutoAfter(10000);
+    pauseAutoFor(10000);
   });
 }
 searchInput.addEventListener('input',runSearch);
 searchInput.addEventListener('keydown',e=>{if(e.key==='Enter')runSearch()});
 searchBtn.onclick=runSearch;
 document.addEventListener('pointerdown',e=>{if(!e.target.closest('.searchbox'))searchResults.style.display='none'});
+document.addEventListener('click',event=>{
+  if(!auto&&!drag&&touches.size===0&&!event.target.closest('.card,.person'))startAutoRotation();
+});
 
 // starfield
 const c=document.getElementById('stars'),ctx=c.getContext('2d');let stars=[];
@@ -344,6 +485,7 @@ function spawnSupporterMeteor(s){
     time:s.time,
     hue:supporterColor(s)
   });
+  activateAudio().then(()=>playMeteorSound(s)).catch(()=>{});
 }
 function checkTimedMeteors(){
   const key=currentTimeKey();

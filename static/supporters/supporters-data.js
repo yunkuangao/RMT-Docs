@@ -1660,8 +1660,8 @@ window.RMT_SUPPORTERS = [
   {
     "year": 2026,
     "time": "9/17 09:06:44",
-    "name": "*C",
-    "note": ""
+    "name": "灵车教主",
+    "note": "贵人扶一步，胜过十年路"
   },
   {
     "year": 2026,
